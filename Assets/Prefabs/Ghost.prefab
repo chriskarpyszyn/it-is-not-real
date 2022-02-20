@@ -111,4 +111,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   moveSpeed: 1
-  offsetFromPlayer: {x: 5, y: 0, z: 0}

@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private bool playerIsInAir = false;
 
     private bool isMovementDisabled = false;
+    private int deathHeight = 10;
 
 
     void Start()
@@ -54,7 +55,6 @@ public class PlayerMovement : MonoBehaviour
 
 
         //restart level if player goes too high or low
-        int deathHeight = 20;
         if (playerY > deathHeight || playerY < -deathHeight)
         {
             playerDied();

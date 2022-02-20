@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
             //todo-ckdo i need to disable movement?
 
             FindObjectOfType<PlayerMovement>().disablePlayerMovement();
-            Invoke("Restart", 2f);
+            Invoke("Restart", 1f);
             FindObjectOfType<PlayerMovement>().resetPlayerProps();
 
         }

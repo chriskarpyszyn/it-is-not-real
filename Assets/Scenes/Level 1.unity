@@ -459,6 +459,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1703494754}
   ghostPrefab: {fileID: 1836379372303725258, guid: 0640d74b7e365a14e98f2f037712be9c, type: 3}
+  musicManagerPrefab: {fileID: 6364393904124607203, guid: ffa701083510ec84886c705dfc31a53a, type: 3}
 --- !u!4 &1009950848
 Transform:
   m_ObjectHideFlags: 0
@@ -467,7 +468,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1009950846}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.7138014, y: -0.3019085, z: -0.39722723}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

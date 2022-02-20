@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject player;
     public GameObject ghostPrefab;
+    public GameObject musicManagerPrefab;
+    private GameObject musicManager;
 
     private bool gameHasEnded = false;
     private Vector3 lastPortalPosition;
@@ -16,13 +18,23 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
+        if (!GameObject.FindGameObjectWithTag("MusicManager"))
+        {
+            musicManager = Instantiate(musicManagerPrefab, transform.position, Quaternion.identity);
+            musicManager.name = musicManagerPrefab.name;
+            DontDestroyOnLoad(musicManager);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    private void toggleMusicPitch()
+    {
+        musicManager.GetComponent<AudioSource>().pitch *= -1;
     }
 
     public void EndGame()
@@ -48,6 +60,7 @@ public class GameManager : MonoBehaviour
 
     public void ToggleDreamMode()
     {
+        toggleMusicPitch();
         if (isDreaming)
         {
             isDreaming = false;

@@ -7,6 +7,7 @@ TagManager:
   - Platform
   - Portal
   - Enemy
+  - MusicManager
   layers:
   - Default
   - TransparentFX

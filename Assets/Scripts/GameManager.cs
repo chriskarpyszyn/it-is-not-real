@@ -26,7 +26,9 @@ public class GameManager : MonoBehaviour
             gameHasEnded = true;
             //todo-ckdo i need to disable movement?
 
+            FindObjectOfType<PlayerMovement>().disablePlayerMovement();
             Invoke("Restart", 2f);
+            FindObjectOfType<PlayerMovement>().resetPlayerProps();
 
         }
     }

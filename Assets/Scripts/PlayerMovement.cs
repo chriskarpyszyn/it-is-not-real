@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool playerIsInAir = false;
 
+    private bool isMovementDisabled = false;
+
 
     void Start()
     {
@@ -30,21 +32,23 @@ public class PlayerMovement : MonoBehaviour
     {
         float playerY = transform.position.y;
 
-
         //player input
-        if (Input.GetKey(KeyCode.W) && rb.velocity.x < maxSpeed)
+        if (!isMovementDisabled)
         {
-            rb.AddForce(movementSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
-        }
-        if (Input.GetKey(KeyCode.S) && rb.velocity.x > -maxSpeed)
-        {
-            rb.AddForce(-movementSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+            if (Input.GetKey(KeyCode.W) && rb.velocity.x < maxSpeed)
+            {
+                rb.AddForce(movementSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+            }
+            if (Input.GetKey(KeyCode.S) && rb.velocity.x > -maxSpeed)
+            {
+                rb.AddForce(-movementSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+            }
+            if (Input.GetKeyDown(KeyCode.Space) && !playerIsInAir)
+            {
+                rb.AddForce(0, getJumpSpeed(), 0, ForceMode.Impulse);
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && !playerIsInAir)
-        {
-            rb.AddForce(0, getJumpSpeed(), 0, ForceMode.Impulse);
-        }
 
         //***********
 
@@ -53,14 +57,26 @@ public class PlayerMovement : MonoBehaviour
         int deathHeight = 20;
         if (playerY > deathHeight || playerY < -deathHeight)
         {
-            FindObjectOfType<GameManager>().EndGame();
-            resetPlayerProps();
+            playerDied();
             
         }
 
     }
 
-    private void resetPlayerProps()
+    public void disablePlayerMovement()
+    {
+        isMovementDisabled = true;
+    }
+
+    /**
+     * call me when the player dies
+     **/
+    private void playerDied()
+    {
+        FindObjectOfType<GameManager>().EndGame();
+    }
+
+    public void resetPlayerProps()
     {
         playerIsInAir = true;
         setGravity(-9.98f);
@@ -99,6 +115,12 @@ public class PlayerMovement : MonoBehaviour
             gravity *= -1;
             setGravity(gravity);
             rb.AddForce(0, getJumpSpeed(-1), 0, ForceMode.Impulse);
+        }
+
+        if (other.gameObject.tag == "Enemy")
+        {
+            FindObjectOfType<GameManager>().EndGame();
+            resetPlayerProps();
         }
     }
 

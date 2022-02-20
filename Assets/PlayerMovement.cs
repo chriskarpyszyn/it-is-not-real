@@ -30,22 +30,6 @@ public class PlayerMovement : MonoBehaviour
     {
         float playerY = transform.position.y;
 
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    gravity = -gravity;
-        //    Physics.gravity = new Vector3(0, gravity, 0);
-        //}
-
-
-        if ((playerY > gravityOffset && gravity > 0) || (playerY < -gravityOffset && gravity < 0))
-        {
-            //Debug.Log("In Gravity Switch");
-            gravity *= -1;
-            Physics.gravity = new Vector3(0, gravity, 0);
-        }
-
-       
-
 
         //player input
         if (Input.GetKey(KeyCode.W) && rb.velocity.x < maxSpeed)
@@ -59,12 +43,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && !playerIsInAir)
         {
-            int invert = 1;
-            if (isGravityInverted())
-            {
-                invert = -1;
-            }
-            rb.AddForce(0, jumpForce*invert, 0, ForceMode.Impulse);
+            rb.AddForce(0, getJumpSpeed(), 0, ForceMode.Impulse);
         }
 
     }
@@ -94,6 +73,9 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.tag == "Portal")
         {
             Debug.Log("Enter Portal");
+            gravity *= -1;
+            Physics.gravity = new Vector3(0, gravity, 0);
+            rb.AddForce(0, getJumpSpeed(-1), 0, ForceMode.Impulse);
         }
     }
 
@@ -104,5 +86,21 @@ public class PlayerMovement : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+
+    private float getJumpSpeed()
+    {
+        return getJumpSpeed(0);
+    }
+    private float getJumpSpeed(float offset)
+    {
+        int invert = 1;
+        if (isGravityInverted())
+        {
+            invert = -1;
+        }
+
+        return (jumpForce+offset)*invert;
     }
 }

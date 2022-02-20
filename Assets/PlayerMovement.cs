@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public float gravity = -9.98f;
     public float gravityOffset = 2;
 
-    public float maxSpeed = 4f;
+    public float maxSpeed = 3f;
 
     private bool playerIsInAir = false;
 
@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 144;
-        Physics.gravity = new Vector3(0, gravity, 0);
+        //Physics.gravity = new Vector3(0, gravity, 0);
     }
 
     // Update is called once per frame
@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
         if ((playerY > gravityOffset && gravity > 0) || (playerY < -gravityOffset && gravity < 0))
         {
-            Debug.Log("In Gravity Switch");
+            //Debug.Log("In Gravity Switch");
             gravity *= -1;
             Physics.gravity = new Vector3(0, gravity, 0);
         }
@@ -72,13 +72,29 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionExit(Collision collision)
     {
         //todo-ck I know there is a better way to do this
-        playerIsInAir = true;
+        if (collision.gameObject.tag == "Platform")
+        {
+            Debug.Log("Exit Platform");
+            playerIsInAir = true;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         //todo-ck need to check for platform and not other types of collision
-        playerIsInAir = false;
+        if (collision.gameObject.tag == "Platform")
+        {
+            Debug.Log("Collision with Platform");
+            playerIsInAir = false;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Portal")
+        {
+            Debug.Log("Enter Portal");
+        }
     }
 
     private bool isGravityInverted()

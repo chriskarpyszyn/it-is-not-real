@@ -45,12 +45,28 @@ public class GameManager : MonoBehaviour
         Invoke("DelayedCreateGhost", 2);
     }
 
+    public void HideAllGhosts()
+    {
+        foreach (GameObject ghost in ghosts)
+        {
+            ghost.SetActive(false);
+        }
+    }
+
+    public void ShowAllGhosts()
+    {
+        foreach (GameObject ghost in ghosts)
+        {
+            ghost.SetActive(true);
+        }
+    }
+
     private void DelayedCreateGhost()
     {
         if (player.GetComponent<PlayerMovement>().isDreaming)
         {
             GameObject ghoulie = Instantiate(ghostPrefab, lastPortalPosition, new Quaternion(0, 0, 0, 0));
-            //ghoulie.GetComponent<GhostMovement>().setPlayer(gameObject);
+            ghosts.Add(ghoulie);
         }
     }
 

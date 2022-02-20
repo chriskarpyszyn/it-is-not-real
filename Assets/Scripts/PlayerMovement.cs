@@ -6,7 +6,6 @@ public class PlayerMovement : MonoBehaviour
 {
 
     public Rigidbody rb;
-    public GameObject ghostPrefab;
     public float movementSpeed = 10;
     public float jumpForce = 5;
     public float gravity = -9.98f;
@@ -119,7 +118,6 @@ public class PlayerMovement : MonoBehaviour
             gravity *= -1;
             setGravity(gravity);
             rb.AddForce(0, getJumpSpeed(-1), 0, ForceMode.Impulse);
-
             FindObjectOfType<GameManager>().CreateGhostAtPosition(transform.position);
         }
 
@@ -163,8 +161,14 @@ public class PlayerMovement : MonoBehaviour
     private void toggleDreamMode()
     {
         if (isDreaming)
+        {
             isDreaming = false;
+            FindObjectOfType<GameManager>().HideAllGhosts();
+        }
         else
+        {
             isDreaming = true;
+            FindObjectOfType<GameManager>().ShowAllGhosts();
+        }
     }
 }

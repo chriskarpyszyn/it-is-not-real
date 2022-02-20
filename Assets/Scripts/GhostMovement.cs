@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class GhostMovement : MonoBehaviour
 {
-
-    public GameObject player;
     public float moveSpeed = 1;
+    GameManager gameManager;
+    PlayerMovement playerMovement;
 
     //public Vector3 offsetFromPlayer = new Vector3(5f, 5f, 0);
 
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
+        playerMovement = gameManager.player.GetComponent<PlayerMovement>();
         //transform.position = player.position - offsetFromPlayer;
     }
 
@@ -21,14 +23,9 @@ public class GhostMovement : MonoBehaviour
     {
 
         //move towards the player
-        transform.LookAt(player.transform);
-        if (player.GetComponent<PlayerMovement>().getIsDreaming())
+        transform.LookAt(playerMovement.transform);
+        if (playerMovement.getIsDreaming())
             transform.position += transform.forward * moveSpeed * Time.deltaTime;
 
-    }
-
-    public void setPlayer(GameObject player)
-    {
-        this.player = player;
     }
 }

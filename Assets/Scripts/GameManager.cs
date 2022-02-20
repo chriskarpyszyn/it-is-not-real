@@ -6,7 +6,12 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 
+    public GameObject player;
+    public GameObject ghostPrefab;
+
     private bool gameHasEnded = false;
+    private Vector3 lastPortalPosition;
+    private List<GameObject> ghosts = new List<GameObject>();
 
     void Start()
     {
@@ -30,6 +35,22 @@ public class GameManager : MonoBehaviour
             Invoke("Restart", 1f);
             FindObjectOfType<PlayerMovement>().resetPlayerProps();
 
+        }
+    }
+
+    public void CreateGhostAtPosition(Vector3 lastPortalPosition)
+    {
+        //this may create a bug
+        this.lastPortalPosition = lastPortalPosition;
+        Invoke("DelayedCreateGhost", 2);
+    }
+
+    private void DelayedCreateGhost()
+    {
+        if (player.GetComponent<PlayerMovement>().isDreaming)
+        {
+            GameObject ghoulie = Instantiate(ghostPrefab, lastPortalPosition, new Quaternion(0, 0, 0, 0));
+            //ghoulie.GetComponent<GhostMovement>().setPlayer(gameObject);
         }
     }
 

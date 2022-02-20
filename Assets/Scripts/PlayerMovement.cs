@@ -20,7 +20,6 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isMovementDisabled = false;
     private int deathHeight = 10;
-    private Vector3 lastPortalPosition;
 
 
     void Start()
@@ -117,13 +116,11 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log("Enter Portal");
             toggleDreamMode();
-            lastPortalPosition = transform.position;
             gravity *= -1;
             setGravity(gravity);
             rb.AddForce(0, getJumpSpeed(-1), 0, ForceMode.Impulse);
 
-            //create ghost after x seconds...
-            Invoke("createGhost", 2);
+            FindObjectOfType<GameManager>().CreateGhostAtPosition(transform.position);
         }
 
         if (other.gameObject.tag == "Enemy")
@@ -156,16 +153,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         return (jumpForce+offset)*invert;
-    }
-
-    private void createGhost()
-    {
-        if (isDreaming)
-        {
-            GameObject ghoulie = Instantiate(ghostPrefab, lastPortalPosition, new Quaternion(0, 0, 0, 0));
-            ghoulie.GetComponent<GhostMovement>().setPlayer(gameObject);
-        }
-        
     }
 
     public bool getIsDreaming()

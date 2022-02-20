@@ -46,6 +46,29 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(0, getJumpSpeed(), 0, ForceMode.Impulse);
         }
 
+        //***********
+
+
+        //restart level if player goes too high or low
+        int deathHeight = 20;
+        if (playerY > deathHeight || playerY < -deathHeight)
+        {
+            FindObjectOfType<GameManager>().EndGame();
+            resetPlayerProps();
+            
+        }
+
+    }
+
+    private void resetPlayerProps()
+    {
+        playerIsInAir = true;
+        setGravity(-9.98f);
+    }
+
+    private void setGravity(float gravity)
+    {
+        Physics.gravity = new Vector3(0, gravity, 0);
     }
 
     private void OnCollisionExit(Collision collision)
@@ -74,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log("Enter Portal");
             gravity *= -1;
-            Physics.gravity = new Vector3(0, gravity, 0);
+            setGravity(gravity);
             rb.AddForce(0, getJumpSpeed(-1), 0, ForceMode.Impulse);
         }
     }

@@ -24,7 +24,7 @@ public class GhostMovement : MonoBehaviour
 
         //move towards the player
         transform.LookAt(playerMovement.transform);
-        if (playerMovement.getIsDreaming())
+        if (gameManager.getIsDreaming())
             transform.position += transform.forward * moveSpeed * Time.deltaTime;
 
     }

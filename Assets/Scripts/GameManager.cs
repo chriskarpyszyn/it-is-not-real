@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     private bool gameHasEnded = false;
     private Vector3 lastPortalPosition;
     private List<GameObject> ghosts = new List<GameObject>();
+    private bool isDreaming = false;
 
     void Start()
     {
@@ -45,7 +46,21 @@ public class GameManager : MonoBehaviour
         Invoke("DelayedCreateGhost", 2);
     }
 
-    public void HideAllGhosts()
+    public void ToggleDreamMode()
+    {
+        if (isDreaming)
+        {
+            isDreaming = false;
+            FindObjectOfType<GameManager>().HideAllGhosts();
+        }
+        else
+        {
+            isDreaming = true;
+            FindObjectOfType<GameManager>().ShowAllGhosts();
+        }
+    }
+
+    private void HideAllGhosts()
     {
         foreach (GameObject ghost in ghosts)
         {
@@ -53,7 +68,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ShowAllGhosts()
+    private void ShowAllGhosts()
     {
         foreach (GameObject ghost in ghosts)
         {
@@ -61,9 +76,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public bool getIsDreaming()
+    {
+        return isDreaming;
+    }
+
+
+
     private void DelayedCreateGhost()
     {
-        if (player.GetComponent<PlayerMovement>().isDreaming)
+        if (isDreaming)
         {
             GameObject ghoulie = Instantiate(ghostPrefab, lastPortalPosition, new Quaternion(0, 0, 0, 0));
             ghosts.Add(ghoulie);

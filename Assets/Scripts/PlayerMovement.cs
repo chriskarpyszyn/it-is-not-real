@@ -11,8 +11,6 @@ public class PlayerMovement : MonoBehaviour
     public float gravity = -9.98f;
     public float gravityOffset = 2;
 
-    public bool isDreaming = false;
-
     public float maxSpeed = 3f;
 
     private bool playerIsInAir = false;
@@ -114,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.tag == "Portal")
         {
             Debug.Log("Enter Portal");
-            toggleDreamMode();
+            FindObjectOfType<GameManager>().ToggleDreamMode();
             gravity *= -1;
             setGravity(gravity);
             rb.AddForce(0, getJumpSpeed(-1), 0, ForceMode.Impulse);
@@ -153,22 +151,4 @@ public class PlayerMovement : MonoBehaviour
         return (jumpForce+offset)*invert;
     }
 
-    public bool getIsDreaming()
-    {
-        return isDreaming;
-    }
-
-    private void toggleDreamMode()
-    {
-        if (isDreaming)
-        {
-            isDreaming = false;
-            FindObjectOfType<GameManager>().HideAllGhosts();
-        }
-        else
-        {
-            isDreaming = true;
-            FindObjectOfType<GameManager>().ShowAllGhosts();
-        }
-    }
 }

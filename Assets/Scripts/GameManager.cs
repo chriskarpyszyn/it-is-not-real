@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public GameObject ghostPrefab;
     public GameObject musicManagerPrefab;
-    private GameObject musicManager;
+    private static GameObject musicManager;
 
     private bool gameHasEnded = false;
     private Vector3 lastPortalPosition;
@@ -36,19 +36,29 @@ public class GameManager : MonoBehaviour
     {
         musicManager.GetComponent<AudioSource>().pitch *= -1;
     }
+    private void resetMusicPitch()
+    {
+        if (musicManager.GetComponent<AudioSource>().pitch < 0)
+        {
+            musicManager.GetComponent<AudioSource>().pitch *= -1;
+        }
+    }
 
     public void EndGame()
     {
         if (gameHasEnded == false)
         {
             gameHasEnded = true;
-            //todo-ckdo i need to disable movement?
 
             FindObjectOfType<PlayerMovement>().disablePlayerMovement();
-            Invoke("Restart", 1f);
             FindObjectOfType<PlayerMovement>().resetPlayerProps();
-
+            resetMusicPitch();
+            Invoke("Restart", 1f);
         }
+    }
+    private void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void CreateGhostAtPosition(Vector3 lastPortalPosition)
@@ -105,8 +115,5 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Restart()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
+
 }

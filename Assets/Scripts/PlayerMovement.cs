@@ -122,7 +122,6 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             FindObjectOfType<GameManager>().EndGame();
-            resetPlayerProps();
         }
     }
 

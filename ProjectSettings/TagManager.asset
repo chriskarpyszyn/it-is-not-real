@@ -8,6 +8,7 @@ TagManager:
   - Portal
   - Enemy
   - MusicManager
+  - DetectionZone
   layers:
   - Default
   - TransparentFX

@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
     public GameObject platformPrefab;
     public GameObject portalPrefab;
     public GameObject spikiesPrefab;
+    public GameObject detectionZonePrefab;
+
+    private float timeToDestruction = 60f;
 
     private static GameObject musicManager;
 
@@ -26,6 +29,7 @@ public class GameManager : MonoBehaviour
     private List<GameObject> platforms = new List<GameObject>();
     private List<GameObject> spikies = new List<GameObject>();
     private List<GameObject> portals = new List<GameObject>();
+    private List<GameObject> detectionZones = new List<GameObject>();
 
     void Start()
     {
@@ -42,15 +46,21 @@ public class GameManager : MonoBehaviour
         float platformXDistance = Mathf.Ceil(Random.Range(6f, 10f));
         GameObject firstPlatform = Instantiate(platformPrefab, new Vector3(0,0,0), Quaternion.identity);
         platforms.Add(firstPlatform);
+        SpawnPlatformAndPortal();
 
-        int numOfPlatforms = 50;
-        for (int i=0; i<= numOfPlatforms; i++)
-        {
-            SpawnAnotherPlatform();
-            SpawnAPortal();
-        }
+        //int numOfPlatforms = 50;
+        //for (int i=0; i<= numOfPlatforms; i++)
+        //{
+        //    SpawnAnotherPlatform();
+        //    SpawnAPortal();
+        //}
     }
 
+    public void SpawnPlatformAndPortal()
+    {
+        SpawnAnotherPlatform();
+        SpawnAPortal();
+    }
     private void SpawnAnotherPlatform()
     {
         float platformXDistance2 = Mathf.Ceil(Random.Range(6f, 10f));
@@ -60,7 +70,11 @@ public class GameManager : MonoBehaviour
 
         GameObject anotherPlatform = Instantiate(platformPrefab, new Vector3(platformXDistance2 + platforms[platforms.Count - 1].transform.position.x, platformRandomY, 0), Quaternion.identity);
         platforms.Add(anotherPlatform);
+        Destroy(anotherPlatform, timeToDestruction);
         SpawnSpikes(anotherPlatform.transform);
+
+        GameObject detectionZone = Instantiate(detectionZonePrefab, new Vector3(anotherPlatform.transform.position.x+2.5f, 0, 0), Quaternion.identity);
+        detectionZones.Add(detectionZone);
     }
 
     private void SpawnSpikes(Transform platform)
@@ -77,6 +91,7 @@ public class GameManager : MonoBehaviour
         {
             GameObject spike1 = Instantiate(spikiesPrefab, new Vector3(Random.Range(farLeftX, farRightX), platform.position.y + 0.29f, 0), Quaternion.identity);
             spikies.Add(spike1);
+            Destroy(spike1, timeToDestruction);
         }
     }
 
@@ -109,6 +124,7 @@ public class GameManager : MonoBehaviour
 
         }
         portals.Add(aPortal);
+        Destroy(aPortal, timeToDestruction);
 
     }
 

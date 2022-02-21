@@ -21,12 +21,16 @@ public class GameManager : MonoBehaviour
     public GameObject spikiesPrefab;
     public GameObject detectionZonePrefab;
     public GameObject pickupPrefab;
+    public GameObject shieldPrefab;
 
     public Material bluePortalMat;
     public Material redPortalMat;
 
     public Material dayPlatformMat;
     public Material nightPlatformMat;
+
+    public Material skyboxDay;
+    public Material skyboxNight;
 
     private float timeToDestruction = 60f;
 
@@ -43,6 +47,7 @@ public class GameManager : MonoBehaviour
     private List<GameObject> portals = new List<GameObject>();
     private List<GameObject> detectionZones = new List<GameObject>();
     private List<GameObject> pickups = new List<GameObject>();
+    private List<GameObject> shields = new List<GameObject>();
 
     void Start()
     {
@@ -167,6 +172,12 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void SpawnShield()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject shield = Instantiate(shieldPrefab, player.transform.position, Quaternion.identity);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -246,6 +257,9 @@ public class GameManager : MonoBehaviour
             Light nightLight = envNightLight.GetComponent<Light>();
             nightLight.enabled = false;
 
+            //modify skybox
+            RenderSettings.skybox = skyboxDay;
+
             //modify portal color
             foreach (GameObject portal in portals)
             {
@@ -270,6 +284,9 @@ public class GameManager : MonoBehaviour
             light.enabled = false;
             Light nightLight = envNightLight.GetComponent<Light>();
             nightLight.enabled = true;
+
+            //modify skybox
+            RenderSettings.skybox = skyboxNight;
 
             //modify portal color
             foreach (GameObject portal in portals)

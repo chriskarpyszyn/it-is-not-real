@@ -64,7 +64,11 @@ public class GameManager : MonoBehaviour
     private void SpawnAnotherPlatform()
     {
         float platformXDistance2 = Mathf.Ceil(Random.Range(6f, 10f));
-        GameObject anotherPlatform = Instantiate(platformPrefab, new Vector3(platformXDistance2 + platforms[platforms.Count - 1].transform.position.x, 0, 0), Quaternion.identity);
+        float platformMaxY = 2f;
+        float platformMinY = -2f;
+        float platformRandomY = Random.Range(platformMinY, platformMaxY);
+
+        GameObject anotherPlatform = Instantiate(platformPrefab, new Vector3(platformXDistance2 + platforms[platforms.Count - 1].transform.position.x, platformRandomY, 0), Quaternion.identity);
         platforms.Add(anotherPlatform);
         SpawnSpikes(anotherPlatform.transform);
     }

@@ -174,7 +174,22 @@ public class GameManager : MonoBehaviour
     {
         //this may create a bug
         this.lastPortalPosition = lastPortalPosition;
-        Invoke("DelayedCreateGhost", 2);
+        //NOTE: MUST MAKE SURE IS DREAMING IS TOGGLED BEFORE CALLING
+        //CREATE GHOST
+        if (isDreaming)
+        {
+            Invoke("DelayedCreateGhost", 2.5f);
+        }
+        
+    }
+    private void DelayedCreateGhost()
+    {
+        if(isDreaming)
+        {
+            GameObject ghoulie = Instantiate(ghostPrefab, lastPortalPosition, new Quaternion(0, 0, 0, 0));
+            ghosts.Add(ghoulie);
+        }
+            
     }
 
     public void ToggleDreamMode()
@@ -211,17 +226,6 @@ public class GameManager : MonoBehaviour
     public bool getIsDreaming()
     {
         return isDreaming;
-    }
-
-
-
-    private void DelayedCreateGhost()
-    {
-        if (isDreaming)
-        {
-            GameObject ghoulie = Instantiate(ghostPrefab, lastPortalPosition, new Quaternion(0, 0, 0, 0));
-            ghosts.Add(ghoulie);
-        }
     }
 
 

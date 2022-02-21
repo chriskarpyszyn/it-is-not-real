@@ -349,7 +349,7 @@ MonoBehaviour:
   platformPrefab: {fileID: 3199298996778294549, guid: 624775e2c760e9645b2b2a1bb129d327, type: 3}
   portalPrefab: {fileID: 8677856293522568975, guid: cf026ace0abe27d408b1ce8456d96013, type: 3}
   spikiesPrefab: {fileID: 8652162852267701584, guid: aa5104b510095494b8d215793904bf25, type: 3}
-  detectionZonePrefab: {fileID: 0}
+  detectionZonePrefab: {fileID: 4174865247324025075, guid: 463a407564c663c448f53c9fbd25e745, type: 3}
 --- !u!4 &1009950848
 Transform:
   m_ObjectHideFlags: 0

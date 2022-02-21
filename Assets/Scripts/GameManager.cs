@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
         float platformXDistance = Mathf.Ceil(Random.Range(6f, 10f));
         GameObject firstPlatform = Instantiate(platformPrefab, new Vector3(0,0,0), Quaternion.identity);
         platforms.Add(firstPlatform);
-        SpawnPlatformAndPortal();
+        SpawnPlatformAndPortal(false);
 
         //int numOfPlatforms = 50;
         //for (int i=0; i<= numOfPlatforms; i++)
@@ -58,12 +58,12 @@ public class GameManager : MonoBehaviour
         //}
     }
 
-    public void SpawnPlatformAndPortal()
+    public void SpawnPlatformAndPortal(bool destroy)
     {
-        SpawnAnotherPlatform();
-        SpawnAPortal();
+        SpawnAnotherPlatform(destroy);
+        SpawnAPortal(destroy);
     }
-    private void SpawnAnotherPlatform()
+    private void SpawnAnotherPlatform(bool destroy)
     {
         float platformXDistance2 = Mathf.Ceil(Random.Range(6f, 10f));
         float platformMaxY = 2f;
@@ -72,14 +72,17 @@ public class GameManager : MonoBehaviour
 
         GameObject anotherPlatform = Instantiate(platformPrefab, new Vector3(platformXDistance2 + platforms[platforms.Count - 1].transform.position.x, platformRandomY, 0), Quaternion.identity);
         platforms.Add(anotherPlatform);
-        Destroy(anotherPlatform, timeToDestruction);
-        SpawnSpikes(anotherPlatform.transform);
+
+        if (destroy)
+            Destroy(anotherPlatform, timeToDestruction);
+
+        SpawnSpikes(anotherPlatform.transform, destroy);
 
         GameObject detectionZone = Instantiate(detectionZonePrefab, new Vector3(anotherPlatform.transform.position.x+2.5f, 0, 0), Quaternion.identity);
         detectionZones.Add(detectionZone);
     }
 
-    private void SpawnSpikes(Transform platform)
+    private void SpawnSpikes(Transform platform, bool destroy)
     {
         float farLeftX = platform.position.x - 2.23f;
         float farRightX = platform.position.x + 1.89f;
@@ -93,11 +96,12 @@ public class GameManager : MonoBehaviour
         {
             GameObject spike1 = Instantiate(spikiesPrefab, new Vector3(Random.Range(farLeftX, farRightX), platform.position.y + 0.29f, 0), Quaternion.identity);
             spikies.Add(spike1);
-            Destroy(spike1, timeToDestruction);
+            if (destroy)
+                Destroy(spike1, timeToDestruction);
         }
     }
 
-    private void SpawnAPortal()
+    private void SpawnAPortal(bool destroy)
     {
         //null check on list
         Transform leftPlatform = platforms[platforms.Count - 2].transform;
@@ -126,7 +130,8 @@ public class GameManager : MonoBehaviour
 
         }
         portals.Add(aPortal);
-        Destroy(aPortal, timeToDestruction);
+        if (destroy)
+            Destroy(aPortal, timeToDestruction);
 
     }
 

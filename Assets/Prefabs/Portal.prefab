@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &755726536
 Transform:
@@ -27,10 +27,11 @@ Transform:
   m_GameObject: {fileID: 755726535}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
-  m_Children: []
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_Children:
+  - {fileID: 4771053541454088593}
   m_Father: {fileID: 8677856293522568971}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &755726538
 ParticleSystem:
@@ -225,7 +226,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.56136525, g: 0.7148815, b: 0.8207547, a: 1}
+        key0: {r: 0.9669811, g: 0.9864923, b: 1, a: 1}
         key1: {r: 0.6273585, g: 0.838522, b: 1, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0.5529412}
         key3: {r: 0, g: 0, b: 0, a: 0}
@@ -667,7 +668,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 1, y: 1, z: 1}
+    m_Scale: {x: 0.8, y: 1, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -746,7 +747,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0.03
     randomPositionAmount: 1
     radius:
-      value: 1
+      value: 0.0001
       mode: 0
       spread: 0
       speed:
@@ -3812,7 +3813,7 @@ ParticleSystem:
   LightsModule:
     enabled: 1
     ratio: 0.8
-    light: {fileID: 1687285773}
+    light: {fileID: 176132764740686314}
     randomDistribution: 1
     color: 1
     range: 0
@@ -4805,7 +4806,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!1 &1687285771
+--- !u!1 &3582789453531210607
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4813,43 +4814,43 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1687285772}
-  - component: {fileID: 1687285773}
+  - component: {fileID: 4771053541454088593}
+  - component: {fileID: 176132764740686314}
   m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
---- !u!4 &1687285772
+--- !u!4 &4771053541454088593
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1687285771}
+  m_GameObject: {fileID: 3582789453531210607}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 8677856293522568971}
+  m_Father: {fileID: 755726536}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!108 &1687285773
+--- !u!108 &176132764740686314
 Light:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1687285771}
-  m_Enabled: 1
+  m_GameObject: {fileID: 3582789453531210607}
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.70980394, g: 0.8078432, b: 0.8705883, a: 1}
-  m_Intensity: 2
-  m_Range: 3
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -4915,7 +4916,7 @@ GameObject:
   m_TagString: Portal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &8677856293522568971
 Transform:
@@ -4926,9 +4927,8 @@ Transform:
   m_GameObject: {fileID: 8677856293522568975}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.01, z: 1}
+  m_LocalScale: {x: 1, y: 0.03, z: 1}
   m_Children:
-  - {fileID: 1687285772}
   - {fileID: 755726536}
   m_Father: {fileID: 0}
   m_RootOrder: 0

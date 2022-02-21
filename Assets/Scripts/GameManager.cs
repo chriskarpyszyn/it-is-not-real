@@ -40,12 +40,20 @@ public class GameManager : MonoBehaviour
 
         //create platform
         float platformXDistance = Mathf.Ceil(Random.Range(6f, 10f));
+        GameObject firstPlatform = Instantiate(platformPrefab, new Vector3(0,0,0), Quaternion.identity);
+        platforms.Add(firstPlatform);
         GameObject aPlatform = Instantiate(platformPrefab, new Vector3(platformXDistance, 0, 0), Quaternion.identity);
         platforms.Add(aPlatform);
-        //todo-ck to figure out this later, let's get some portals first.
+        SpawnAPortal();
         SpawnAnotherPlatform();
+        SpawnAPortal();
         SpawnAnotherPlatform();
+        SpawnAPortal();
         SpawnAnotherPlatform();
+        SpawnAPortal();
+        SpawnAnotherPlatform();
+        SpawnAPortal();
+
 
 
         //create portal
@@ -58,6 +66,47 @@ public class GameManager : MonoBehaviour
         float platformXDistance2 = Mathf.Ceil(Random.Range(6f, 10f));
         GameObject anotherPlatform = Instantiate(platformPrefab, new Vector3(platformXDistance2 + platforms[platforms.Count - 1].transform.position.x, 0, 0), Quaternion.identity);
         platforms.Add(anotherPlatform);
+        SpawnSpikes(anotherPlatform.transform);
+    }
+
+    private void SpawnSpikes(Transform platform)
+    {
+        float farLeftX = platform.position.x - 2.23f;
+        float farRightX = platform.position.x + 1.89f;
+        int maxNumberOfSpikes = 4;
+        int minNumberOfSpikes = 0;
+
+        //spawn between 0 and 3 spikes
+        int numberOfSpikes = Random.Range(minNumberOfSpikes, maxNumberOfSpikes);
+
+        for (int i = 0; i<=numberOfSpikes; i++)
+        {
+            GameObject spike1 = Instantiate(spikiesPrefab, new Vector3(Random.Range(farLeftX, farRightX), platform.position.y + 0.29f, 0), Quaternion.identity);
+            spikies.Add(spike1);
+        }
+    }
+
+    private void SpawnAPortal()
+    {
+        //null check on list
+        Transform leftPlatform = platforms[platforms.Count - 2].transform;
+        Transform rightPlatform = platforms[platforms.Count - 1].transform;
+
+        float center = (rightPlatform.position.x - leftPlatform.position.x) / 2; //?
+
+        Debug.Log(platforms.Count);
+
+        GameObject aPortal;
+        if (platforms.Count == 2)
+        {
+            aPortal = Instantiate(portalPrefab, new Vector3(center, 0, 0), Quaternion.identity); //todo-ck can i ignore quaternion prop
+        } else
+        {
+            aPortal = Instantiate(portalPrefab, new Vector3(center + leftPlatform.position.x, 0, 0), Quaternion.identity); //todo-ck can i ignore quaternion prop
+
+        }
+        portals.Add(aPortal);
+
     }
 
     // Update is called once per frame

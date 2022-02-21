@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public GameObject portalPrefab;
     public GameObject spikiesPrefab;
     public GameObject detectionZonePrefab;
+    public GameObject pickupPrefab;
 
     public Material bluePortalMat;
     public Material redPortalMat;
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour
     private List<GameObject> spikies = new List<GameObject>();
     private List<GameObject> portals = new List<GameObject>();
     private List<GameObject> detectionZones = new List<GameObject>();
+    private List<GameObject> pickups = new List<GameObject>();
 
     void Start()
     {
@@ -86,6 +88,7 @@ public class GameManager : MonoBehaviour
             Destroy(anotherPlatform, timeToDestruction);
 
         SpawnSpikes(anotherPlatform.transform, destroy);
+        SpawnPickups(anotherPlatform.transform, destroy);
 
         GameObject detectionZone = Instantiate(detectionZonePrefab, new Vector3(anotherPlatform.transform.position.x+2.5f, 0, 0), Quaternion.identity);
         detectionZones.Add(detectionZone);
@@ -107,6 +110,26 @@ public class GameManager : MonoBehaviour
             spikies.Add(spike1);
             if (destroy)
                 Destroy(spike1, timeToDestruction);
+        }
+    }
+
+    private void SpawnPickups(Transform platform, bool destroy)
+    {
+        float farLeftX = platform.position.x - 3f;
+        float farRightX = platform.position.x + 3f;
+        float minY = platform.position.y + 1f;
+        float maxY = platform.position.y + 4f;
+        int maxNumberOfPickups = 1;
+        int minNumberOfPickups = -3;
+
+        int numberOfPickups = Random.Range(minNumberOfPickups, maxNumberOfPickups);
+
+        for (int i = 0; i<=numberOfPickups; i++)
+        {
+            GameObject pickup = Instantiate(pickupPrefab, new Vector3(Random.Range(farLeftX, farRightX), Random.Range(minY, maxY), 0), Quaternion.identity);
+            pickups.Add(pickup);
+            if (destroy)
+                Destroy(pickup, timeToDestruction);
         }
     }
 

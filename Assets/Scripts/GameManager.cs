@@ -42,17 +42,13 @@ public class GameManager : MonoBehaviour
         float platformXDistance = Mathf.Ceil(Random.Range(6f, 10f));
         GameObject firstPlatform = Instantiate(platformPrefab, new Vector3(0,0,0), Quaternion.identity);
         platforms.Add(firstPlatform);
-        GameObject aPlatform = Instantiate(platformPrefab, new Vector3(platformXDistance, 0, 0), Quaternion.identity);
-        platforms.Add(aPlatform);
-        SpawnAPortal();
-        SpawnAnotherPlatform();
-        SpawnAPortal();
-        SpawnAnotherPlatform();
-        SpawnAPortal();
-        SpawnAnotherPlatform();
-        SpawnAPortal();
-        SpawnAnotherPlatform();
-        SpawnAPortal();
+
+        int numOfPlatforms = 50;
+        for (int i=0; i<=50; i++)
+        {
+            SpawnAnotherPlatform();
+            SpawnAPortal();
+        }
     }
 
     private void SpawnAnotherPlatform()
@@ -92,7 +88,6 @@ public class GameManager : MonoBehaviour
 
         float centerX = (rightPlatform.position.x - leftPlatform.position.x) / 2; //?
 
-        //float centerY = (leftPlatform.position.y - rightPlatform.position.y) / 2;
         float midpointY = (Mathf.Abs(leftPlatform.position.y) + Mathf.Abs(rightPlatform.position.y))/2;
         float centerY;
         if (leftPlatform.position.y > rightPlatform.position.y)
@@ -125,13 +120,20 @@ public class GameManager : MonoBehaviour
 
     private void toggleMusicPitch()
     {
-        musicManager.GetComponent<AudioSource>().pitch *= -1;
+        if (isDreaming)
+        {
+            musicManager.GetComponent<AudioSource>().pitch = 1;
+        } else
+        {
+            musicManager.GetComponent<AudioSource>().pitch = -0.7f;
+        }
+        
     }
     private void resetMusicPitch()
     {
         if (musicManager.GetComponent<AudioSource>().pitch < 0)
         {
-            musicManager.GetComponent<AudioSource>().pitch *= -1;
+            musicManager.GetComponent<AudioSource>().pitch = 1;
         }
     }
 

@@ -115,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
             FindObjectOfType<GameManager>().ToggleDreamMode();
             gravity *= -1;
             setGravity(gravity);
-            rb.AddForce(0, getJumpSpeed(-1), 0, ForceMode.Impulse);
+            rb.AddForce(0, getJumpSpeed(5), 0, ForceMode.Impulse);
             FindObjectOfType<GameManager>().CreateGhostAtPosition(transform.position);
         }
 

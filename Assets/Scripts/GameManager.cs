@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 {
 
     public GameObject player;
+    public GameObject itIsRealText;
+    public GameObject itIsNotRealText;
     public GameObject ghostPrefab;
     public GameObject musicManagerPrefab;
 
@@ -199,12 +201,28 @@ public class GameManager : MonoBehaviour
         {
             isDreaming = false;
             FindObjectOfType<GameManager>().HideAllGhosts();
+            setCanvasTitleText(isDreaming);
         }
         else
         {
             isDreaming = true;
             FindObjectOfType<GameManager>().ShowAllGhosts();
+            setCanvasTitleText(isDreaming);
         }
+    }
+
+    private void setCanvasTitleText(bool isDreaming)
+    {
+        if (isDreaming)
+        {
+            itIsNotRealText.SetActive(true);
+            itIsRealText.SetActive(false);
+        } else
+        {
+            itIsNotRealText.SetActive(false);
+            itIsRealText.SetActive(true);
+        }
+
     }
 
     private void HideAllGhosts()

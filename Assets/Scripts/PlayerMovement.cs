@@ -36,11 +36,11 @@ public class PlayerMovement : MonoBehaviour
         //player input
         if (!isMovementDisabled)
         {
-            if (Input.GetKey(KeyCode.W) && rb.velocity.x < maxSpeed)
+            if (Input.GetKey(KeyCode.D) && rb.velocity.x < maxSpeed)
             {
                 rb.AddForce(movementSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
             }
-            if (Input.GetKey(KeyCode.S) && rb.velocity.x > -maxSpeed)
+            if (Input.GetKey(KeyCode.A) && rb.velocity.x > -maxSpeed)
             {
                 rb.AddForce(-movementSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
             }

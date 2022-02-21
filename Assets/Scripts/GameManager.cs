@@ -143,13 +143,13 @@ public class GameManager : MonoBehaviour
             musicManager.GetComponent<AudioSource>().pitch = 1;
         } else
         {
-            musicManager.GetComponent<AudioSource>().pitch = -0.7f;
+            musicManager.GetComponent<AudioSource>().pitch = 0.5f;
         }
         
     }
     private void resetMusicPitch()
     {
-        if (musicManager.GetComponent<AudioSource>().pitch < 0)
+        if (musicManager.GetComponent<AudioSource>().pitch < 1)
         {
             musicManager.GetComponent<AudioSource>().pitch = 1;
         }

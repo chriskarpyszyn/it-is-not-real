@@ -21,6 +21,12 @@ public class GameManager : MonoBehaviour
     public GameObject spikiesPrefab;
     public GameObject detectionZonePrefab;
 
+    public Material bluePortalMat;
+    public Material redPortalMat;
+
+    public Material dayPlatformMat;
+    public Material nightPlatformMat;
+
     private float timeToDestruction = 60f;
 
     private static GameObject musicManager;
@@ -217,6 +223,18 @@ public class GameManager : MonoBehaviour
             Light nightLight = envNightLight.GetComponent<Light>();
             nightLight.enabled = false;
 
+            //modify portal color
+            foreach (GameObject portal in portals)
+            {
+                portal.GetComponent<MeshRenderer>().material = bluePortalMat;
+            }
+
+            //modify platform color
+            foreach (GameObject platform in platforms)
+            {
+                platform.GetComponent<MeshRenderer>().material = dayPlatformMat;
+            }
+
         }
         else
         {
@@ -229,6 +247,18 @@ public class GameManager : MonoBehaviour
             light.enabled = false;
             Light nightLight = envNightLight.GetComponent<Light>();
             nightLight.enabled = true;
+
+            //modify portal color
+            foreach (GameObject portal in portals)
+            {
+                portal.GetComponent<MeshRenderer>().material = redPortalMat;
+            }
+
+            //modify platform color
+            foreach (GameObject platform in platforms)
+            {
+                platform.GetComponent<MeshRenderer>().material = nightPlatformMat;
+            }
         }
     }
 

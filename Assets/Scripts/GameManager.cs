@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
+
 public class GameManager : MonoBehaviour
 {
 
@@ -12,6 +13,8 @@ public class GameManager : MonoBehaviour
     public GameObject itIsNotRealText;
     public GameObject ghostPrefab;
     public GameObject musicManagerPrefab;
+    public Light envLight;
+    public Light envNightLight;
 
     public GameObject platformPrefab;
     public GameObject portalPrefab;
@@ -207,12 +210,25 @@ public class GameManager : MonoBehaviour
             isDreaming = false;
             FindObjectOfType<GameManager>().HideAllGhosts();
             setCanvasTitleText(isDreaming);
+
+            //modify lightning
+            Light light = envLight.GetComponent<Light>();
+            light.enabled = true;
+            Light nightLight = envNightLight.GetComponent<Light>();
+            nightLight.enabled = false;
+
         }
         else
         {
             isDreaming = true;
             FindObjectOfType<GameManager>().ShowAllGhosts();
             setCanvasTitleText(isDreaming);
+
+            //modify lightning
+            Light light = envLight.GetComponent<Light>();
+            light.enabled = false;
+            Light nightLight = envNightLight.GetComponent<Light>();
+            nightLight.enabled = true;
         }
     }
 

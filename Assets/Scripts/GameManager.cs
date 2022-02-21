@@ -53,12 +53,6 @@ public class GameManager : MonoBehaviour
         SpawnAPortal();
         SpawnAnotherPlatform();
         SpawnAPortal();
-
-
-
-        //create portal
-        //create spikies
-
     }
 
     private void SpawnAnotherPlatform()
@@ -96,17 +90,27 @@ public class GameManager : MonoBehaviour
         Transform leftPlatform = platforms[platforms.Count - 2].transform;
         Transform rightPlatform = platforms[platforms.Count - 1].transform;
 
-        float center = (rightPlatform.position.x - leftPlatform.position.x) / 2; //?
+        float centerX = (rightPlatform.position.x - leftPlatform.position.x) / 2; //?
 
-        Debug.Log(platforms.Count);
+        //float centerY = (leftPlatform.position.y - rightPlatform.position.y) / 2;
+        float midpointY = (Mathf.Abs(leftPlatform.position.y) + Mathf.Abs(rightPlatform.position.y))/2;
+        float centerY;
+        if (leftPlatform.position.y > rightPlatform.position.y)
+        {
+            centerY = leftPlatform.position.y - midpointY;
+        } else
+        {
+            centerY = rightPlatform.position.y - midpointY;
+        }
+        
 
         GameObject aPortal;
         if (platforms.Count == 2)
         {
-            aPortal = Instantiate(portalPrefab, new Vector3(center, 0, 0), Quaternion.identity); //todo-ck can i ignore quaternion prop
+            aPortal = Instantiate(portalPrefab, new Vector3(centerX, centerY, 0), Quaternion.identity); //todo-ck can i ignore quaternion prop
         } else
         {
-            aPortal = Instantiate(portalPrefab, new Vector3(center + leftPlatform.position.x, 0, 0), Quaternion.identity); //todo-ck can i ignore quaternion prop
+            aPortal = Instantiate(portalPrefab, new Vector3(centerX + leftPlatform.position.x, centerY, 0), Quaternion.identity); //todo-ck can i ignore quaternion prop
 
         }
         portals.Add(aPortal);

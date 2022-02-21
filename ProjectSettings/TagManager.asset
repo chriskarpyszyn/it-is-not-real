@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - MusicManager
   - DetectionZone
+  - Pickup
   layers:
   - Default
   - TransparentFX

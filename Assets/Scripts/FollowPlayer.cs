@@ -24,6 +24,6 @@ public class FollowPlayer : MonoBehaviour
             cameraY = player.position.y;
         }
 
-        transform.position = new Vector3(player.position.x, cameraY, -8);
+        transform.position = new Vector3(player.position.x, cameraY, offset.z);
     }
 }

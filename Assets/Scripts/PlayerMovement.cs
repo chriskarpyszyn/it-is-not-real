@@ -92,7 +92,6 @@ public class PlayerMovement : MonoBehaviour
         //todo-ck I know there is a better way to do this
         if (collision.gameObject.tag == "Platform")
         {
-            Debug.Log("Exit Platform");
             playerIsInAir = true;
         }
     }
@@ -102,16 +101,14 @@ public class PlayerMovement : MonoBehaviour
         //todo-ck need to check for platform and not other types of collision
         if (collision.gameObject.tag == "Platform")
         {
-            Debug.Log("Collision with Platform");
             playerIsInAir = false;
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Portal")
+        if (other.gameObject.tag == "Portal" && other.gameObject.tag != "Shield")
         {
-            Debug.Log("Enter Portal");
             FindObjectOfType<GameManager>().ToggleDreamMode();
             gravity *= -1;
             setGravity(gravity);

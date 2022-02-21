@@ -10,6 +10,7 @@ TagManager:
   - MusicManager
   - DetectionZone
   - Pickup
+  - Shield
   layers:
   - Default
   - TransparentFX

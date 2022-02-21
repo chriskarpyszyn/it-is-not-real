@@ -16,12 +16,12 @@ public class PlayerMovement : MonoBehaviour
     private bool playerIsInAir = false;
 
     private bool isMovementDisabled = false;
-    private int deathHeight = 10;
+    private int deathHeight = 15;
 
 
     void Start()
     {
-        Application.targetFrameRate = 144;
+        Application.targetFrameRate = 60;
         //Physics.gravity = new Vector3(0, gravity, 0);
     }
 

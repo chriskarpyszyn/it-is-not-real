@@ -162,13 +162,13 @@ public class GameManager : MonoBehaviour
             gameHasEnded = true;
 
             FindObjectOfType<PlayerMovement>().disablePlayerMovement();
-            FindObjectOfType<PlayerMovement>().resetPlayerProps();
-            resetMusicPitch();
             Invoke("Restart", 1f);
         }
     }
     private void Restart()
     {
+        FindObjectOfType<PlayerMovement>().resetPlayerProps();
+        resetMusicPitch();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

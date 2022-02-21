@@ -3,18 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class GameManager : MonoBehaviour
 {
 
     public GameObject player;
     public GameObject ghostPrefab;
     public GameObject musicManagerPrefab;
+
+    public GameObject platformPrefab;
+    public GameObject portalPrefab;
+    public GameObject spikiesPrefab;
+
     private static GameObject musicManager;
 
     private bool gameHasEnded = false;
     private Vector3 lastPortalPosition;
-    private List<GameObject> ghosts = new List<GameObject>();
     private bool isDreaming = false;
+
+
+    private List<GameObject> ghosts = new List<GameObject>();
+    private List<GameObject> platforms = new List<GameObject>();
+    private List<GameObject> spikies = new List<GameObject>();
+    private List<GameObject> portals = new List<GameObject>();
 
     void Start()
     {
@@ -24,6 +35,29 @@ public class GameManager : MonoBehaviour
             musicManager.name = musicManagerPrefab.name;
             DontDestroyOnLoad(musicManager);
         }
+
+        //load level procedurally
+
+        //create platform
+        float platformXDistance = Mathf.Ceil(Random.Range(6f, 10f));
+        GameObject aPlatform = Instantiate(platformPrefab, new Vector3(platformXDistance, 0, 0), Quaternion.identity);
+        platforms.Add(aPlatform);
+        //todo-ck to figure out this later, let's get some portals first.
+        SpawnAnotherPlatform();
+        SpawnAnotherPlatform();
+        SpawnAnotherPlatform();
+
+
+        //create portal
+        //create spikies
+
+    }
+
+    private void SpawnAnotherPlatform()
+    {
+        float platformXDistance2 = Mathf.Ceil(Random.Range(6f, 10f));
+        GameObject anotherPlatform = Instantiate(platformPrefab, new Vector3(platformXDistance2 + platforms[platforms.Count - 1].transform.position.x, 0, 0), Quaternion.identity);
+        platforms.Add(anotherPlatform);
     }
 
     // Update is called once per frame

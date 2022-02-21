@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         platforms.Add(firstPlatform);
 
         int numOfPlatforms = 50;
-        for (int i=0; i<=50; i++)
+        for (int i=0; i<= numOfPlatforms; i++)
         {
             SpawnAnotherPlatform();
             SpawnAPortal();

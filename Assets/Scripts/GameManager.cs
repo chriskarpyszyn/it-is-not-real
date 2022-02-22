@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     private bool gameHasEnded = false;
     private Vector3 lastPortalPosition;
     private bool isDreaming = false;
+    private float ghostSpawnDelay = 1.98f;
 
 
     private List<GameObject> ghosts = new List<GameObject>();
@@ -227,9 +228,10 @@ public class GameManager : MonoBehaviour
         this.lastPortalPosition = lastPortalPosition;
         //NOTE: MUST MAKE SURE IS DREAMING IS TOGGLED BEFORE CALLING
         //CREATE GHOST
+        
         if (isDreaming)
         {
-            Invoke("DelayedCreateGhost", 2.5f);
+            Invoke("DelayedCreateGhost", ghostSpawnDelay);
         }
         
     }

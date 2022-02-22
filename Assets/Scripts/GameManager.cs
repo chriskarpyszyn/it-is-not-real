@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
     public Material skyboxDay;
     public Material skyboxNight;
 
+    public Transform ghostKillEffect;
+
     private float timeToDestruction = 60f;
 
     private static GameObject musicManager;
@@ -65,6 +67,8 @@ public class GameManager : MonoBehaviour
         float platformXDistance = Mathf.Ceil(Random.Range(6f, 10f));
         GameObject firstPlatform = Instantiate(platformPrefab, new Vector3(0,0,0), Quaternion.identity);
         platforms.Add(firstPlatform);
+        SpawnPlatformAndPortal(false);
+        SpawnPlatformAndPortal(false);
         SpawnPlatformAndPortal(false);
 
         //int numOfPlatforms = 50;
@@ -210,18 +214,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /*
+     * When a ghost hits the player, check if they have a shielf
+     */
     public void CheckSheidOrDie()
     {
         if (shields.Count > 0)
         {
             //kill a ghost
             GameObject ghostToKill = ghosts[ghosts.Count-1];
+            Transform effect = Instantiate(ghostKillEffect, ghostToKill.transform.position, ghostToKill.transform.rotation);
             Destroy(ghostToKill);
+            Destroy(effect.gameObject, 3);
             ghosts.RemoveAt(ghosts.Count - 1);
+
 
             //remove a shield
             GameObject shieldToRemove = shields[shields.Count-1];
-            Destroy(shieldToRemove);
+            Destroy(shieldToRemove.gameObject);
             shields.RemoveAt(shields.Count - 1);
 
             

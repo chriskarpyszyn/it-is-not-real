@@ -11,6 +11,8 @@ TagManager:
   - DetectionZone
   - Pickup
   - Shield
+  - Ghost
+  - Spikes
   layers:
   - Default
   - TransparentFX

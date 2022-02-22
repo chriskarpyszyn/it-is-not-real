@@ -116,7 +116,12 @@ public class PlayerMovement : MonoBehaviour
             FindObjectOfType<GameManager>().CreateGhostAtPosition(transform.position);
         }
 
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Ghost")
+        {
+            FindObjectOfType<GameManager>().CheckSheidOrDie();
+        }
+
+        if (other.gameObject.tag == "Spikes")
         {
             FindObjectOfType<GameManager>().EndGame();
         }

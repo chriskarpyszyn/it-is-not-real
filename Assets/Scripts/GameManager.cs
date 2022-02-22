@@ -178,12 +178,17 @@ public class GameManager : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         GameObject shield = Instantiate(shieldPrefab, player.transform.position, Quaternion.identity);
         shield.GetComponent<FollowPlayer>().player = player.transform;
+        shields.Add(shield);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //cheats
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            SpawnShield();
+        }
     }
 
     private void toggleMusicPitch()
@@ -202,6 +207,27 @@ public class GameManager : MonoBehaviour
         if (musicManager.GetComponent<AudioSource>().pitch < 1)
         {
             musicManager.GetComponent<AudioSource>().pitch = 1;
+        }
+    }
+
+    public void CheckSheidOrDie()
+    {
+        if (shields.Count > 0)
+        {
+            //kill a ghost
+            GameObject ghostToKill = ghosts[ghosts.Count-1];
+            Destroy(ghostToKill);
+            ghosts.RemoveAt(ghosts.Count - 1);
+
+            //remove a shield
+            GameObject shieldToRemove = shields[shields.Count-1];
+            Destroy(shieldToRemove);
+            shields.RemoveAt(shields.Count - 1);
+
+            
+        } else
+        {
+            EndGame();
         }
     }
 

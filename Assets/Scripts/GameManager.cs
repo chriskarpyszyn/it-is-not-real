@@ -176,6 +176,7 @@ public class GameManager : MonoBehaviour
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         GameObject shield = Instantiate(shieldPrefab, player.transform.position, Quaternion.identity);
+        shield.GetComponent<FollowPlayer>().player = player.transform;
     }
 
     // Update is called once per frame

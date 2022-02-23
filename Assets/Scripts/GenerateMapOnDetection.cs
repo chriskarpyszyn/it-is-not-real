@@ -8,7 +8,7 @@ public class GenerateMapOnDetection : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            FindObjectOfType<GameManager>().SpawnPlatformAndPortal(true);
+            FindObjectOfType<GameManager>().SpawnPlatformAndPortal(false);
             Destroy(gameObject);
         }
     }

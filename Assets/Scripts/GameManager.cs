@@ -231,8 +231,9 @@ public class GameManager : MonoBehaviour
 
             //remove a shield
             GameObject shieldToRemove = shields[shields.Count-1];
-            Destroy(shieldToRemove.gameObject);
             shields.RemoveAt(shields.Count - 1);
+            Destroy(shieldToRemove.gameObject);
+            
 
             
         } else

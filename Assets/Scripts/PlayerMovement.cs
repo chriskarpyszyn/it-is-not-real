@@ -107,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Portal" && other.gameObject.tag != "Shield")
+        if (other.gameObject.tag == "Portal")
         {
             FindObjectOfType<GameManager>().ToggleDreamMode();
             gravity *= -1;

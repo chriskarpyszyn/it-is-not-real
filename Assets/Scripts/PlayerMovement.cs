@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isMovementDisabled = false;
     private int deathHeight = 15;
 
+
     static PlayerAudio playerAudio;
 
     void Start()
@@ -120,13 +121,17 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private bool stopSecondCollision = false;
     private void OnCollisionEnter(Collision collision)
     {
-        //todo-ck need to check for platform and not other types of collision
-        if (collision.gameObject.tag == "Platform")
+        if (collision.gameObject.tag == "Platform" && stopSecondCollision)
         {
             playerIsInAir = false;
             playerAudio.playLandingSound();
+            stopSecondCollision = false;
+        }else
+        {
+            stopSecondCollision = true;
         }
     }
 

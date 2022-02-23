@@ -38,6 +38,9 @@ public class PlayerAudio : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //todo-ck this class is becoming more of an audio manager, 
+        //and i can refactor this ontrigger back to the player class and call a play function
+        //more directly.
         if (other.gameObject.tag == "Portal")
         {
             audioSource = GetComponent<AudioSource>();
@@ -78,9 +81,17 @@ public class PlayerAudio : MonoBehaviour
         playSoundRegular(playerJumpSound, playerJumpSoundPitch, playerJumpSoundVolume);
     }
 
+    private bool skipFirstTime = false;
     public void playLandingSound()
     {
-        playSoundRegular(playerLandSound, playerLandSoundPitch, playerLandSoundVolume);
+        if (skipFirstTime)
+        {
+            playSoundRegular(playerLandSound, playerLandSoundPitch, playerLandSoundVolume);
+
+        }else
+        {
+            skipFirstTime = true;
+        }
     }
 
     private void playSoundRegular(AudioClip clip, float pitch, float vol)

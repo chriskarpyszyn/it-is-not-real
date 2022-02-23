@@ -1496,10 +1496,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 859422075340468451, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
-      propertyPath: ghostPrefab
-      value: 
-      objectReference: {fileID: 1836379372303725258, guid: 0640d74b7e365a14e98f2f037712be9c, type: 3}
     - target: {fileID: 859422075340468457, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1547,6 +1543,10 @@ PrefabInstance:
     - target: {fileID: 859422075340468460, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
+      propertyPath: enterPortalSoundPitch
+      value: 0.45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 518b26bad73378040b9b16f6963c190e, type: 3}

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8652162850975647710}
   m_Layer: 0
   m_Name: Spike1
-  m_TagString: Enemy
+  m_TagString: Spikes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 8652162851677487882}
   m_Layer: 0
   m_Name: Spike2
-  m_TagString: Enemy
+  m_TagString: Spikes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -237,7 +237,7 @@ GameObject:
   - component: {fileID: 8652162852528816791}
   m_Layer: 0
   m_Name: Spike3
-  m_TagString: Enemy
+  m_TagString: Spikes
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

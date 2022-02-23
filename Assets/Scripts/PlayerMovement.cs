@@ -18,11 +18,14 @@ public class PlayerMovement : MonoBehaviour
     private bool isMovementDisabled = false;
     private int deathHeight = 15;
 
+    static PlayerAudio playerAudio;
 
     void Start()
     {
         Application.targetFrameRate = 60;
         //Physics.gravity = new Vector3(0, gravity, 0);
+        playerAudio = GetComponent<PlayerAudio>();
+
     }
 
     // Update is called once per frame
@@ -36,18 +39,38 @@ public class PlayerMovement : MonoBehaviour
         //player input
         if (!isMovementDisabled)
         {
+            if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A))
+            {
+                if (!playerIsInAir)
+                {
+                    playerAudio.setFirstMovement();
+                }
+           
+            }
             if (Input.GetKey(KeyCode.D) && rb.velocity.x < maxSpeed)
             {
                 rb.AddForce(movementSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+
+                if (!playerIsInAir)
+                {
+                    playerAudio.playPlayerMovementSound();
+                }
             }
             if (Input.GetKey(KeyCode.A) && rb.velocity.x > -maxSpeed)
             {
                 rb.AddForce(-movementSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+                if (!playerIsInAir)
+                {
+                    playerAudio.playPlayerMovementSound();
+                }
+
             }
             if (Input.GetKeyDown(KeyCode.Space) && !playerIsInAir)
             {
                 rb.AddForce(0, getJumpSpeed(), 0, ForceMode.Impulse);
             }
+
+       
         }
 
 

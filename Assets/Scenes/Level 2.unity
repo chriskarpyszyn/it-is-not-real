@@ -1545,8 +1545,32 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
+      propertyPath: playerMovementSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 96643ecc5b768a0469fad778e200bf5d, type: 3}
+    - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
       propertyPath: enterPortalSoundPitch
       value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
+      propertyPath: enterPortalSoundVolume
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
+      propertyPath: playerMovementSoundDelay
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
+      propertyPath: playerMovementSoundPitch
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
+      propertyPath: playerMovmentSoundVolume
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
+      propertyPath: playerMovementSoundFirstDalay
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 518b26bad73378040b9b16f6963c190e, type: 3}

@@ -1545,12 +1545,36 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
+      propertyPath: playerJumpSound
+      value: 
+      objectReference: {fileID: 8300000, guid: d28eb5deed269fd40b27cf3ad099ba27, type: 3}
+    - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
+      propertyPath: playerLandSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 876a004dff4f5ff4385589b7e779ec23, type: 3}
+    - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
       propertyPath: playerMovementSound
       value: 
       objectReference: {fileID: 8300000, guid: 96643ecc5b768a0469fad778e200bf5d, type: 3}
     - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
+      propertyPath: playerJumpSoundPitch
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
+      propertyPath: playerLandSoundPitch
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
       propertyPath: enterPortalSoundPitch
       value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
+      propertyPath: playerJumpSoundVolume
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
+      propertyPath: playerLandSoundVolume
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
       propertyPath: enterPortalSoundVolume

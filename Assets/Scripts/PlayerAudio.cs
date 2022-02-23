@@ -19,6 +19,18 @@ public class PlayerAudio : MonoBehaviour
     public float playerMovementSoundFirstDalay = 0.5f;
     public float playerMovementSoundDelay = 0.3f;
 
+    public AudioClip playerJumpSound;
+    public float playerJumpSoundPitch = 1;
+    public float playerJumpSoundVolume = 0.8f;
+
+    public AudioClip playerLandSound;
+    public float playerLandSoundPitch = 1;
+    public float playerLandSoundVolume = 0.8f;
+
+    public AudioClip deathSound;
+    public float deathSoundPitch = 1;
+    public float deathSoundVolume = 0.8f;
+
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -42,7 +54,7 @@ public class PlayerAudio : MonoBehaviour
 
     private float slightPitchShift(float startingNumber)
     {
-        return Random.Range(startingNumber - 0.8f, startingNumber + 0.8f);
+        return Random.Range(startingNumber - 0.2f, startingNumber + 0.2f);
     }
 
     public void playPlayerMovementSound()
@@ -59,6 +71,24 @@ public class PlayerAudio : MonoBehaviour
                 playWithDelay(playerMovementSoundDelay);
             }
         }
+    }
+
+    public void playJumpSound()
+    {
+        playSoundRegular(playerJumpSound, playerJumpSoundPitch, playerJumpSoundVolume);
+    }
+
+    public void playLandingSound()
+    {
+        playSoundRegular(playerLandSound, playerLandSoundPitch, playerLandSoundVolume);
+    }
+
+    private void playSoundRegular(AudioClip clip, float pitch, float vol)
+    {
+        audioSource.clip = clip;
+        audioSource.pitch = slightPitchShift(pitch);
+        audioSource.volume = vol;
+        audioSource.Play();
     }
 
     private void firstMovementSound()

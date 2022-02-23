@@ -116,6 +116,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.tag == "Platform")
         {
             playerIsInAir = true;
+            playerAudio.playJumpSound();
         }
     }
 
@@ -125,6 +126,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.tag == "Platform")
         {
             playerIsInAir = false;
+            playerAudio.playLandingSound();
         }
     }
 

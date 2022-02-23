@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using UnityEngine.Audio;
 
 public class Pickup : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Pickup : MonoBehaviour
         if (other.tag == "Player")
         {
             Transform effect = Instantiate(pickupEffect, transform.position, transform.rotation);
+
             Destroy(effect.gameObject, 3);
             Destroy(gameObject);
 

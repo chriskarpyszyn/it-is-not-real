@@ -52,6 +52,8 @@ public class GameManager : MonoBehaviour
     private List<GameObject> pickups = new List<GameObject>();
     private List<GameObject> shields = new List<GameObject>();
 
+    static PlayerAudio playerAudio;
+
     void Start()
     {
         if (!GameObject.FindGameObjectWithTag("MusicManager"))
@@ -77,6 +79,8 @@ public class GameManager : MonoBehaviour
         //    SpawnAnotherPlatform();
         //    SpawnAPortal();
         //}
+
+        playerAudio = player.GetComponent<PlayerAudio>();
     }
 
     public void SpawnPlatformAndPortal(bool destroy)
@@ -247,6 +251,7 @@ public class GameManager : MonoBehaviour
         if (gameHasEnded == false)
         {
             gameHasEnded = true;
+            playerAudio.playDeathSound();
 
             FindObjectOfType<PlayerMovement>().disablePlayerMovement();
             Invoke("Restart", 1f);

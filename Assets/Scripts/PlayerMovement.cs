@@ -69,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space) && !playerIsInAir)
             {
                 rb.AddForce(0, getJumpSpeed(), 0, ForceMode.Impulse);
+                playerAudio.playJumpSound();
             }
 
        
@@ -117,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.tag == "Platform")
         {
             playerIsInAir = true;
-            playerAudio.playJumpSound();
+            
         }
     }
 

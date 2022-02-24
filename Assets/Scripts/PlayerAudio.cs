@@ -78,7 +78,12 @@ public class PlayerAudio : MonoBehaviour
 
     public void playJumpSound()
     {
-        playSoundRegular(playerJumpSound, playerJumpSoundPitch, playerJumpSoundVolume);
+        playSound(playerJumpSound, playerJumpSoundPitch, playerJumpSoundVolume);
+    }
+
+    public void playDeathSound()
+    {
+        playSound(deathSound, deathSoundPitch, deathSoundVolume, false);
     }
 
     private bool skipFirstTime = false;
@@ -86,7 +91,7 @@ public class PlayerAudio : MonoBehaviour
     {
         if (skipFirstTime)
         {
-            playSoundRegular(playerLandSound, playerLandSoundPitch, playerLandSoundVolume);
+            playSound(playerLandSound, playerLandSoundPitch, playerLandSoundVolume);
 
         }else
         {
@@ -94,12 +99,19 @@ public class PlayerAudio : MonoBehaviour
         }
     }
 
-    private void playSoundRegular(AudioClip clip, float pitch, float vol)
+    private void playSound(AudioClip clip, float pitch, float vol, bool shiftPitch)
     {
         audioSource.clip = clip;
-        audioSource.pitch = slightPitchShift(pitch);
+        if (shiftPitch)
+            audioSource.pitch = slightPitchShift(pitch);
+        else
+            audioSource.pitch = pitch;
         audioSource.volume = vol;
         audioSource.Play();
+    }
+    private void playSound(AudioClip clip, float pitch, float vol)
+    {
+        playSound(clip, pitch, vol, true);
     }
 
     private void firstMovementSound()

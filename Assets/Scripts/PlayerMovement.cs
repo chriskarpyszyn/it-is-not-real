@@ -122,18 +122,16 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private bool stopSecondCollision = false;
+    
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Platform" && stopSecondCollision)
+        if (collision.gameObject.tag == "Platform")
         {
+            Debug.Log("On Collision Enter: " + collision.gameObject.name);
             playerIsInAir = false;
             playerAudio.playLandingSound();
-            stopSecondCollision = false;
-        }else
-        {
-            stopSecondCollision = true;
         }
+  
     }
 
     private void OnTriggerEnter(Collider other)

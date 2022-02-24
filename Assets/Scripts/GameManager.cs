@@ -67,7 +67,8 @@ public class GameManager : MonoBehaviour
 
         //create platform
         float platformXDistance = Mathf.Ceil(Random.Range(6f, 10f));
-        GameObject firstPlatform = Instantiate(platformPrefab, new Vector3(0,0,0), Quaternion.identity);
+        //GameObject firstPlatform = Instantiate(platformPrefab, new Vector3(0,0,0), Quaternion.identity);
+        GameObject firstPlatform = GameObject.Find("Platform");
         platforms.Add(firstPlatform);
         SpawnPlatformAndPortal(false);
         SpawnPlatformAndPortal(false);

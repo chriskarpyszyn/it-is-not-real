@@ -1545,6 +1545,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
+      propertyPath: deathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b21f6afd76b1d764b9cbe816d6767ff6, type: 3}
+    - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
+      propertyPath: deathSoundPitch
+      value: 1.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
       propertyPath: playerJumpSound
       value: 
       objectReference: {fileID: 8300000, guid: d28eb5deed269fd40b27cf3ad099ba27, type: 3}
@@ -1552,6 +1560,10 @@ PrefabInstance:
       propertyPath: playerLandSound
       value: 
       objectReference: {fileID: 8300000, guid: 876a004dff4f5ff4385589b7e779ec23, type: 3}
+    - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
+      propertyPath: deathSoundVolume
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
       propertyPath: playerMovementSound
       value: 

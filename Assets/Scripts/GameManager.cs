@@ -34,8 +34,6 @@ public class GameManager : MonoBehaviour
 
     public Transform ghostKillEffect;
 
-    private float timeToDestruction = 60f;
-
     private static GameObject musicManager;
 
     private bool gameHasEnded = false;
@@ -56,6 +54,9 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+
+        List<string> test = new List<string>();
+
         if (!GameObject.FindGameObjectWithTag("MusicManager"))
         {
             musicManager = Instantiate(musicManagerPrefab, transform.position, Quaternion.identity);
@@ -70,9 +71,9 @@ public class GameManager : MonoBehaviour
         //GameObject firstPlatform = Instantiate(platformPrefab, new Vector3(0,0,0), Quaternion.identity);
         GameObject firstPlatform = GameObject.Find("Platform");
         platforms.Add(firstPlatform);
-        SpawnPlatformAndPortal(false);
-        SpawnPlatformAndPortal(false);
-        SpawnPlatformAndPortal(false);
+        SpawnPlatformAndPortal();
+        SpawnPlatformAndPortal();
+        SpawnPlatformAndPortal();
 
         //int numOfPlatforms = 50;
         //for (int i=0; i<= numOfPlatforms; i++)
@@ -84,12 +85,12 @@ public class GameManager : MonoBehaviour
         playerAudio = player.GetComponent<PlayerAudio>();
     }
 
-    public void SpawnPlatformAndPortal(bool destroy)
+    public void SpawnPlatformAndPortal()
     {
-        SpawnAnotherPlatform(destroy);
-        SpawnAPortal(destroy);
+        SpawnAnotherPlatform();
+        SpawnAPortal();
     }
-    private void SpawnAnotherPlatform(bool destroy)
+    private void SpawnAnotherPlatform()
     {
         float platformXDistance2 = Mathf.Ceil(Random.Range(6f, 10f));
         float platformMaxY = 2f;
@@ -99,17 +100,16 @@ public class GameManager : MonoBehaviour
         GameObject anotherPlatform = Instantiate(platformPrefab, new Vector3(platformXDistance2 + platforms[platforms.Count - 1].transform.position.x, platformRandomY, 0), Quaternion.identity);
         platforms.Add(anotherPlatform);
 
-        if (destroy)
-            Destroy(anotherPlatform, timeToDestruction);
 
-        SpawnSpikes(anotherPlatform.transform, destroy);
-        SpawnPickups(anotherPlatform.transform, destroy);
+
+        SpawnSpikes(anotherPlatform.transform);
+        SpawnPickups(anotherPlatform.transform);
 
         GameObject detectionZone = Instantiate(detectionZonePrefab, new Vector3(anotherPlatform.transform.position.x+2.5f, 0, 0), Quaternion.identity);
         detectionZones.Add(detectionZone);
     }
 
-    private void SpawnSpikes(Transform platform, bool destroy)
+    private void SpawnSpikes(Transform platform)
     {
         float farLeftX = platform.position.x - 2.23f;
         float farRightX = platform.position.x + 1.89f;
@@ -123,12 +123,11 @@ public class GameManager : MonoBehaviour
         {
             GameObject spike1 = Instantiate(spikiesPrefab, new Vector3(Random.Range(farLeftX, farRightX), platform.position.y + 0.29f, 0), Quaternion.identity);
             spikies.Add(spike1);
-            if (destroy)
-                Destroy(spike1, timeToDestruction);
         }
+
     }
 
-    private void SpawnPickups(Transform platform, bool destroy)
+    private void SpawnPickups(Transform platform)
     {
         float farLeftX = platform.position.x - 3f;
         float farRightX = platform.position.x + 3f;
@@ -143,12 +142,11 @@ public class GameManager : MonoBehaviour
         {
             GameObject pickup = Instantiate(pickupPrefab, new Vector3(Random.Range(farLeftX, farRightX), Random.Range(minY, maxY), 0), Quaternion.identity);
             pickups.Add(pickup);
-            if (destroy)
-                Destroy(pickup, timeToDestruction);
         }
+
     }
 
-    private void SpawnAPortal(bool destroy)
+    private void SpawnAPortal()
     {
         //null check on list
         Transform leftPlatform = platforms[platforms.Count - 2].transform;
@@ -177,8 +175,7 @@ public class GameManager : MonoBehaviour
 
         }
         portals.Add(aPortal);
-        if (destroy)
-            Destroy(aPortal, timeToDestruction);
+
 
     }
 
@@ -188,6 +185,29 @@ public class GameManager : MonoBehaviour
         GameObject shield = Instantiate(shieldPrefab, player.transform.position, Quaternion.identity);
         shield.GetComponent<FollowPlayer>().player = player.transform;
         shields.Add(shield);
+    }
+
+    //************************
+    //******garbage collections
+    //************************
+    private void destroyObjects(List<GameObject> gameObjectList, int listCount, int numToRemove)
+    {
+        if (gameObjectList.Count >= listCount)
+        {
+            for (int i = 0; i < numToRemove; i++)
+            {
+                GameObject go = gameObjectList[i];
+                gameObjectList.RemoveAt(i);
+                Destroy(go);
+            }
+        }
+    }
+    public void doDestroyObjects()
+    {
+        destroyObjects(platforms, 8, 1);
+        destroyObjects(spikies, 25, 3);
+        destroyObjects(pickups, 10, 1);
+        destroyObjects(portals, 8, 1);
     }
 
     // Update is called once per frame

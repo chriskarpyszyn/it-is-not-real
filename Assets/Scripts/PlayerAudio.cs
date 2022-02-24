@@ -5,7 +5,10 @@ using UnityEngine.Audio;
 
 public class PlayerAudio : MonoBehaviour
 {
-    private AudioSource audioSource;
+    private AudioSource audioSource1;
+    private AudioSource audioSource2;
+    private AudioSource audioSource3;
+    private AudioSource[] audioSources;
     private bool firstMovement = false;
     private bool waitingForSound = false;
 
@@ -33,7 +36,9 @@ public class PlayerAudio : MonoBehaviour
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        audioSources = GetComponents<AudioSource>();
+        audioSource1 = audioSources[0];
+        audioSource2 = audioSources[1];
     }
 
     private void OnTriggerEnter(Collider other)
@@ -43,15 +48,15 @@ public class PlayerAudio : MonoBehaviour
         //more directly.
         if (other.gameObject.tag == "Portal")
         {
-            audioSource = GetComponent<AudioSource>();
-            audioSource.clip = enterPortalSound;
+            audioSource1 = GetComponent<AudioSource>();
+            audioSource1.clip = enterPortalSound;
 
             //slight pitch shift to make things different
             float randomPitchShift = slightPitchShift(enterPortalSoundPitch);
 
-            audioSource.pitch = enterPortalSoundPitch;
-            audioSource.volume = enterPortalSoundVolume;
-            audioSource.Play();
+            audioSource1.pitch = enterPortalSoundPitch;
+            audioSource1.volume = enterPortalSoundVolume;
+            audioSource1.Play();
         }
     }
 
@@ -71,8 +76,24 @@ public class PlayerAudio : MonoBehaviour
         {
             if (!waitingForSound)
             {
-                playWithDelay(playerMovementSoundDelay);
+                playWalkingWithDelay(playerMovementSoundDelay);
             }
+        }
+    }
+    private void firstMovementSound()
+    {
+        playWalkingWithDelay(0);
+        waitingForSound = false;
+    }
+    private void playWalkingWithDelay(float delay)
+    {
+        if (!audioSource2.isPlaying)
+        {
+            audioSource2.clip = playerMovementSound;
+            audioSource2.pitch = slightPitchShift(playerMovementSoundPitch);
+            audioSource2.volume = playerMovmentSoundVolume;
+
+            audioSource2.PlayDelayed(delay);
         }
     }
 
@@ -101,36 +122,31 @@ public class PlayerAudio : MonoBehaviour
 
     private void playSound(AudioClip clip, float pitch, float vol, bool shiftPitch)
     {
-        audioSource.clip = clip;
+        AudioSource audioSource1 = getAvailableAudioSource();
+        audioSource1.clip = clip;
         if (shiftPitch)
-            audioSource.pitch = slightPitchShift(pitch);
+            audioSource1.pitch = slightPitchShift(pitch);
         else
-            audioSource.pitch = pitch;
-        audioSource.volume = vol;
-        audioSource.Play();
+            audioSource1.pitch = pitch;
+        audioSource1.volume = vol;
+        audioSource1.Play();
+
     }
     private void playSound(AudioClip clip, float pitch, float vol)
     {
         playSound(clip, pitch, vol, true);
     }
-
-    private void firstMovementSound()
+    
+    private AudioSource getAvailableAudioSource()
     {
-        Debug.Log("TRUE)");
-        playWithDelay(0);
-        waitingForSound = false;
-    }
-
-    private void playWithDelay(float delay)
-    {
-        if (!audioSource.isPlaying)
+        foreach (AudioSource audioSource in audioSources)
         {
-            audioSource.clip = playerMovementSound;
-            audioSource.pitch = slightPitchShift(playerMovementSoundPitch);
-            audioSource.volume = playerMovmentSoundVolume;
-
-            audioSource.PlayDelayed(delay);
+            if (!audioSource.isPlaying)
+            {
+                return audioSource;
+            }
         }
+        return audioSources[0];
     }
 
     public void setFirstMovement()

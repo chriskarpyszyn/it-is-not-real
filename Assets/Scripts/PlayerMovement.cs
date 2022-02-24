@@ -18,6 +18,9 @@ public class PlayerMovement : MonoBehaviour
     private bool isMovementDisabled = false;
     private int deathHeight = 15;
 
+    private static float skyboxRotation = 3.302045f;
+    private static float skyboxRotationSpeed = 0.5f;
+
 
     static PlayerAudio playerAudio;
 
@@ -35,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        RenderSettings.skybox.SetFloat("_Rotation", skyboxRotation);
+
         float playerY = transform.position.y;
 
         //player input
@@ -51,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKey(KeyCode.D) && rb.velocity.x < maxSpeed)
             {
                 rb.AddForce(movementSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+                skyboxRotation += skyboxRotationSpeed * Time.deltaTime;
 
                 if (!playerIsInAir)
                 {
@@ -60,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKey(KeyCode.A) && rb.velocity.x > -maxSpeed)
             {
                 rb.AddForce(-movementSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+                skyboxRotation -= skyboxRotationSpeed * Time.deltaTime;
                 if (!playerIsInAir)
                 {
                     playerAudio.playPlayerMovementSound();

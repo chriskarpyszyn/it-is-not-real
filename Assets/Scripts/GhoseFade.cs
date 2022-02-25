@@ -56,7 +56,6 @@ public class GhoseFade : MonoBehaviour
 
 
             Color objectColor = renderer.material.GetColor(emissionName);
-            Debug.Log("fade in " + objectColor.r);
             float fadeAmount = objectColor.r + (fadeSpeed * Time.deltaTime);
 
 

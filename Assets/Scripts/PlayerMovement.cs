@@ -23,6 +23,9 @@ public class PlayerMovement : MonoBehaviour
     private static float skyboxRotation = 3.302045f;
     private static float skyboxRotationSpeed = 0.5f;
 
+    private bool forwardButtonPressed = false;
+    private bool backwardButtonPressed = false;
+
 
     static PlayerAudio playerAudio;
 
@@ -34,10 +37,36 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+
     // Update is called once per frame
     // We marked this as FixedUpdate because we are using it with Unity Physics
     //todo-ck better to check for input in the update method and set a bool to update in fixedUpdate
+    private void FixedUpdate()
+    {
+        if (forwardButtonPressed && rb.velocity.x < maxSpeed && !isMovementDisabled)
+        {
+            //if (rb.velocity.x == 0)
+            //{
+            //    movementSpeed = 50;
+            //}
+            rb.AddForce(movementSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+            skyboxRotation += skyboxRotationSpeed * Time.deltaTime;
+            if (!playerIsInAir)
+            {
+                playerAudio.playPlayerMovementSound();
+            }
+        }
 
+        if (backwardButtonPressed && rb.velocity.x > -maxSpeed && !isMovementDisabled)
+        {
+            rb.AddForce(-movementSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+            skyboxRotation -= skyboxRotationSpeed * Time.deltaTime;
+            if (!playerIsInAir)
+            {
+                playerAudio.playPlayerMovementSound();
+            }
+        }
+    }
     private void Update()
     {
         RenderSettings.skybox.SetFloat("_Rotation", skyboxRotation);
@@ -55,24 +84,33 @@ public class PlayerMovement : MonoBehaviour
                 }
            
             }
-            if (Input.GetKey(KeyCode.D) && rb.velocity.x < maxSpeed)
-            {
-                rb.AddForce(movementSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
-                skyboxRotation += skyboxRotationSpeed * Time.deltaTime;
 
-                if (!playerIsInAir)
-                {
-                    playerAudio.playPlayerMovementSound();
-                }
-            }
-            if (Input.GetKey(KeyCode.A) && rb.velocity.x > -maxSpeed)
+            if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
             {
-                rb.AddForce(-movementSpeed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
-                skyboxRotation -= skyboxRotationSpeed * Time.deltaTime;
-                if (!playerIsInAir)
-                {
-                    playerAudio.playPlayerMovementSound();
-                }
+                forwardButtonPressed = true;
+            }
+            if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.RightArrow))
+            {
+                forwardButtonPressed = false;
+            }
+            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                backwardButtonPressed = true;
+            }
+            if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.LeftArrow))
+            {
+                backwardButtonPressed = false;
+            }
+
+            if (Input.GetKey(KeyCode.D) )
+            {
+
+
+
+            }
+            if (Input.GetKey(KeyCode.A) )
+            {
+ 
 
             }
             if (Input.GetKeyDown(KeyCode.Space) && !playerIsInAir)

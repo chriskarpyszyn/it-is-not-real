@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.8457146, g: 0.7652221, b: 0.6434504, a: 1}
+  m_IndirectSpecularColor: {r: 0.84624535, g: 0.7656984, b: 0.6438578, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1763,6 +1763,10 @@ PrefabInstance:
       value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
+      propertyPath: ghostDeathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 5a137701960a10d47929b9539d2acb74, type: 3}
+    - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
       propertyPath: playerJumpSound
       value: 
       objectReference: {fileID: 8300000, guid: d28eb5deed269fd40b27cf3ad099ba27, type: 3}
@@ -1779,6 +1783,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 96643ecc5b768a0469fad778e200bf5d, type: 3}
     - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
+      propertyPath: ghostDeathSoundPitch
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
       propertyPath: playerJumpSoundPitch
       value: 0.9
       objectReference: {fileID: 0}
@@ -1789,6 +1797,10 @@ PrefabInstance:
     - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
       propertyPath: enterPortalSoundPitch
       value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
+      propertyPath: ghostDeathSoundVolume
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1797342779186404232, guid: 518b26bad73378040b9b16f6963c190e, type: 3}
       propertyPath: playerJumpSoundVolume

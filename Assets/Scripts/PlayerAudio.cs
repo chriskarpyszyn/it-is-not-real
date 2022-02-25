@@ -34,6 +34,10 @@ public class PlayerAudio : MonoBehaviour
     public float deathSoundPitch = 1;
     public float deathSoundVolume = 0.8f;
 
+    public AudioClip ghostDeathSound;
+    public float ghostDeathSoundPitch = 1;
+    public float ghostDeathSoundVolume = 0.8f;
+
     private void Start()
     {
         audioSources = GetComponents<AudioSource>();
@@ -105,6 +109,12 @@ public class PlayerAudio : MonoBehaviour
     public void playDeathSound()
     {
         playSound(deathSound, deathSoundPitch, deathSoundVolume, false);
+    }
+
+    public void playGhostDeathSound()
+    {
+        playSound(ghostDeathSound, ghostDeathSoundPitch, ghostDeathSoundVolume, false);
+
     }
 
     private bool skipFirstTime = false;

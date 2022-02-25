@@ -253,6 +253,9 @@ public class GameManager : MonoBehaviour
             Destroy(effect.gameObject, 3);
             ghosts.RemoveAt(ghosts.Count - 1);
 
+            //play a kill ghost sound
+            GameObject.FindObjectOfType<PlayerAudio>().playGhostDeathSound();
+
 
             //remove a shield
             GameObject shieldToRemove = shields[shields.Count-1];

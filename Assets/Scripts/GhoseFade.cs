@@ -21,7 +21,7 @@ public class GhoseFade : MonoBehaviour
     void Start()
     {
         Renderer renderer = this.GetComponent<Renderer>();
-        Color objectColor = new Color(minIntensity, minIntensity, minIntensity);
+        Color objectColor = new Color(minIntensity, minIntensity, minIntensity,0);
         renderer.material.SetColor(emissionName, objectColor);
     }
 
@@ -38,7 +38,7 @@ public class GhoseFade : MonoBehaviour
             float fadeAmount = objectColor.r - (fadeSpeed * Time.deltaTime);
 
 
-            objectColor = new Color(fadeAmount, fadeAmount, fadeAmount);
+            objectColor = new Color(fadeAmount, fadeAmount, fadeAmount,0);
             renderer.material.SetColor(emissionName, objectColor);
             //tailRenderer.material.SetColor(emissionName, objectColor);
 
@@ -60,7 +60,7 @@ public class GhoseFade : MonoBehaviour
             float fadeAmount = objectColor.r + (fadeSpeed * Time.deltaTime);
 
 
-            objectColor = new Color(fadeAmount, fadeAmount, fadeAmount);
+            objectColor = new Color(fadeAmount, fadeAmount, fadeAmount,0);
             renderer.material.SetColor(emissionName, objectColor);
             //tailRenderer.material.SetColor(emissionName, objectColor);
 
@@ -74,7 +74,9 @@ public class GhoseFade : MonoBehaviour
 
     public void FadeOutObject()
     {
-        fadeOut = true;
+        Renderer renderer = this.GetComponent<Renderer>();
+        Color objectColor = new Color(minIntensity, minIntensity, minIntensity,0);
+        renderer.material.SetColor(emissionName, objectColor);
     }
 
     public void FadeInObject()

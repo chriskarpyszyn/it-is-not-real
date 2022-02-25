@@ -388,7 +388,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (GameObject ghost in ghosts)
         {
-            //ghost.GetComponent<GhoseFade>().FadeOutObject();
+            ghost.GetComponent<GhoseFade>().FadeOutObject();
             ghost.SetActive(false);
         }
     }
@@ -397,8 +397,9 @@ public class GameManager : MonoBehaviour
     {
         foreach (GameObject ghost in ghosts)
         {
-            //ghost.GetComponent<GhoseFade>().FadeInObject();
             ghost.SetActive(true);
+            ghost.GetComponent<GhoseFade>().FadeInObject();
+
         }
     }
 

@@ -304,8 +304,10 @@ public class GameManager : MonoBehaviour
         {
             GameObject ghoulie = Instantiate(ghostPrefab, lastPortalPosition, new Quaternion(0, 0, 0, 0));
             ghosts.Add(ghoulie);
+            //ghoulie.GetComponent<GhoseFade>().FadeInObject();
+
         }
-            
+
     }
 
     public void ToggleDreamMode()
@@ -386,6 +388,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (GameObject ghost in ghosts)
         {
+            //ghost.GetComponent<GhoseFade>().FadeOutObject();
             ghost.SetActive(false);
         }
     }
@@ -394,6 +397,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (GameObject ghost in ghosts)
         {
+            //ghost.GetComponent<GhoseFade>().FadeInObject();
             ghost.SetActive(true);
         }
     }

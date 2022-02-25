@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     public float gravity = -9.98f;
     public float gravityOffset = 2;
 
+    public Vector3 ghostStartingOffset = new Vector3(-2, 0, 0);
+
     public float maxSpeed = 3f;
 
     private bool playerIsInAir = false;
@@ -149,7 +151,7 @@ public class PlayerMovement : MonoBehaviour
             gravity *= -1;
             setGravity(gravity);
             rb.AddForce(0, getJumpSpeed(5), 0, ForceMode.Impulse);
-            FindObjectOfType<GameManager>().CreateGhostAtPosition(transform.position);
+            FindObjectOfType<GameManager>().CreateGhostAtPosition(transform.position+ghostStartingOffset);
         }
 
         if (other.gameObject.tag == "Ghost")

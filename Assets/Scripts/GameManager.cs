@@ -408,5 +408,10 @@ public class GameManager : MonoBehaviour
         return isDreaming;
     }
 
+    public bool HasGameEnded()
+    {
+        return gameHasEnded;
+    }
+
 
 }

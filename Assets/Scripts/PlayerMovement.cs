@@ -173,7 +173,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.tag == "Platform")
         {
-            Debug.Log("On Collision Enter: " + collision.gameObject.name);
             playerIsInAir = false;
             playerAudio.playLandingSound();
         }

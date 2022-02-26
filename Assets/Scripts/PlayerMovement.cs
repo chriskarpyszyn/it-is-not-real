@@ -17,8 +17,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool playerIsInAir = false;
 
-    private bool isMovementDisabled = false;
-    private int deathHeight = 15;
+    private static bool isMovementDisabled = false;
+    private int deathHeight = 12;
 
     private static float skyboxRotation = 3.302045f;
     private static float skyboxRotationSpeed = 0.5f;
@@ -137,6 +137,11 @@ public class PlayerMovement : MonoBehaviour
     public void disablePlayerMovement()
     {
         isMovementDisabled = true;
+    }
+
+    public void enablePlayerMovement()
+    {
+        isMovementDisabled = false;
     }
 
     /**

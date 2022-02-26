@@ -133,13 +133,17 @@ public class PlayerAudio : MonoBehaviour
     private void playSound(AudioClip clip, float pitch, float vol, bool shiftPitch)
     {
         AudioSource audioSource1 = getAvailableAudioSource();
-        audioSource1.clip = clip;
-        if (shiftPitch)
-            audioSource1.pitch = slightPitchShift(pitch);
-        else
-            audioSource1.pitch = pitch;
-        audioSource1.volume = vol;
-        audioSource1.Play();
+        if (audioSource1 != null)
+        {
+            audioSource1.clip = clip;
+            if (shiftPitch)
+                audioSource1.pitch = slightPitchShift(pitch);
+            else
+                audioSource1.pitch = pitch;
+            audioSource1.volume = vol;
+            audioSource1.Play();
+        }
+
 
     }
     private void playSound(AudioClip clip, float pitch, float vol)
@@ -151,7 +155,7 @@ public class PlayerAudio : MonoBehaviour
     {
         foreach (AudioSource audioSource in audioSources)
         {
-            if (!audioSource.isPlaying)
+            if (audioSource != null && !audioSource.isPlaying)
             {
                 return audioSource;
             }

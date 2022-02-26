@@ -118,7 +118,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private float alpha = 1;
     void Update()
     {
         //cheats
@@ -133,10 +132,11 @@ public class GameManager : MonoBehaviour
             secondsInDream = (int)timer % 60;
         }
 
-        if (Input.anyKeyDown && gameHasEnded
+        if (Input.anyKeyDown && gameHasEnded && SceneManager.GetActiveScene().buildIndex == 1 && !fadeOut
             && !(Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2)))
         {
             gameHasEnded = false;
+            FindObjectOfType<PlayerMovement>().enablePlayerMovement();
             SceneManager.LoadScene(0);
         }
 

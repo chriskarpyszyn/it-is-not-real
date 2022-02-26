@@ -192,7 +192,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (other.gameObject.tag == "Ghost")
         {
-            FindObjectOfType<GameManager>().CheckSheidOrDie();
+            FindObjectOfType<GameManager>().CheckSheidOrDie(other.gameObject);
         }
 
         if (other.gameObject.tag == "Spikes")

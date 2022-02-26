@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -326,26 +327,38 @@ public class GameManager : MonoBehaviour
     /*
      * When a ghost hits the player, check if they have a shielf
      */
-    public void CheckSheidOrDie()
+    public void CheckSheidOrDie(GameObject ghostObject)
     {
         if (shields.Count > 0)
         {
             //kill a ghost
-            GameObject ghostToKill = ghosts[ghosts.Count-1];
-            Transform effect = Instantiate(ghostKillEffect, ghostToKill.transform.position, ghostToKill.transform.rotation);
-            Destroy(ghostToKill);
-            Destroy(effect.gameObject, 3);
-            ghosts.RemoveAt(ghosts.Count - 1);
-            ghostKilled++;
+            string objectName = ghostObject.name;
 
-            //play a kill ghost sound
-            GameObject.FindObjectOfType<PlayerAudio>().playGhostDeathSound();
+            for (int i=0; i<ghosts.Count; i++)
+            {
+                if (ghosts[i].name == objectName)
+                {
+                    GameObject ghostToKill = ghosts[i];
+                    Transform effect = Instantiate(ghostKillEffect, ghostToKill.transform.position, ghostToKill.transform.rotation);
+                    Destroy(ghostToKill);
+                    Destroy(effect.gameObject, 3);
+                    ghosts.RemoveAt(i);
+                    ghostKilled++;
+
+                    //play a kill ghost sound
+                    GameObject.FindObjectOfType<PlayerAudio>().playGhostDeathSound();
 
 
-            //remove a shield
-            GameObject shieldToRemove = shields[shields.Count-1];
-            shields.RemoveAt(shields.Count - 1);
-            Destroy(shieldToRemove.gameObject);
+                    //remove a shield
+                    GameObject shieldToRemove = shields[shields.Count - 1];
+                    shields.RemoveAt(shields.Count - 1);
+                    Destroy(shieldToRemove.gameObject);
+                }
+            }
+            
+
+
+
             
 
             
@@ -394,6 +407,7 @@ public class GameManager : MonoBehaviour
         {
             GameObject ghoulie = Instantiate(ghostPrefab, lastPortalPosition, new Quaternion(0, 0, 0, 0));
             ghosts.Add(ghoulie);
+            ghoulie.name = "ghost " + ghosts.Count + " " + Time.time;
             //ghoulie.GetComponent<GhoseFade>().FadeInObject();
 
         }

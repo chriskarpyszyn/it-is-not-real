@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class FollowPlayer : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class FollowPlayer : MonoBehaviour
     void Update()
     {
         float cameraY;
+        Transform platformTransform = player.GetComponent<PlayerMovement>().platformTransform;
 
         if (player.position.y >= 0.35 && player.position.y < 0.4)
         {

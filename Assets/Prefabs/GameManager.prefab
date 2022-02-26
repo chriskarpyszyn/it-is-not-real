@@ -64,6 +64,10 @@ MonoBehaviour:
   skyboxDay: {fileID: 2100000, guid: 40fa5696077438a49bbce1aac01eba84, type: 2}
   skyboxNight: {fileID: 2100000, guid: 328ae47d9ef6b3e4c9c99f385fef8ad4, type: 2}
   ghostKillEffect: {fileID: 902871794708296004, guid: afe17db2baeb63d4d917c70efb413397, type: 3}
+  fadeCanvas: {fileID: 0}
+  scoreText2: {fileID: 0}
+  dreamText: {fileID: 0}
+  ghostKilledText: {fileID: 0}
 --- !u!114 &8974640742413935672
 MonoBehaviour:
   m_ObjectHideFlags: 0

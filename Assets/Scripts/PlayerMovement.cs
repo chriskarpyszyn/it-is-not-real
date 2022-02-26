@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
 
     static PlayerAudio playerAudio;
 
+    public Transform platformTransform;
+
     void Start()
     {
         Application.targetFrameRate = 60;
@@ -142,6 +144,7 @@ public class PlayerMovement : MonoBehaviour
     public void enablePlayerMovement()
     {
         isMovementDisabled = false;
+
     }
 
     /**
@@ -180,6 +183,7 @@ public class PlayerMovement : MonoBehaviour
         {
             playerIsInAir = false;
             playerAudio.playLandingSound();
+            platformTransform = collision.transform;
         }
   
     }

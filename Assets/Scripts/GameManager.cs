@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     private static GameObject musicManager;
 
-    static private bool gameHasEnded = false;
+    private static bool gameHasEnded = false;
     private Vector3 lastPortalPosition;
     private bool isDreaming = false;
     private float ghostSpawnDelay = 1.98f;
@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
     public Text ghostKilledText;
     private float timer = 0;
 
+
     public void SetScore(int score)
     {
         scoreDistance = score;
@@ -82,10 +83,13 @@ public class GameManager : MonoBehaviour
         timer = 0;
     }
 
+
     void Start()
     {
-        if (!gameHasEnded)
+        if (SceneManager.GetActiveScene().buildIndex == 0)
         {
+            gameHasEnded = false;
+            
             List<string> test = new List<string>();
 
             if (!GameObject.FindGameObjectWithTag("MusicManager"))
@@ -113,18 +117,22 @@ public class GameManager : MonoBehaviour
             //    SpawnAPortal();
             //}
 
+            FindObjectOfType<PlayerMovement>().enablePlayerMovement();
             playerAudio = player.GetComponent<PlayerAudio>();
+
+            
         }
+
 
     }
 
     void Update()
     {
         //cheats
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            SpawnShield();
-        }
+        //if (Input.GetKeyDown(KeyCode.M))
+        //{
+        //    SpawnShield();
+        //}
 
         if (isDreaming)
         {
@@ -135,9 +143,8 @@ public class GameManager : MonoBehaviour
         if (Input.anyKeyDown && gameHasEnded && SceneManager.GetActiveScene().buildIndex == 1 && !fadeOut
             && !(Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2)))
         {
-            gameHasEnded = false;
-            FindObjectOfType<PlayerMovement>().enablePlayerMovement();
             SceneManager.LoadScene(0);
+
         }
 
         if (fadeIn)
@@ -157,9 +164,6 @@ public class GameManager : MonoBehaviour
         }
         if (fadeOut)
         {
-
- 
- 
 
             Color objectColor = fadeCanvas.GetComponent<Image>().color;
             objectColor.a -= fadeSpeed;

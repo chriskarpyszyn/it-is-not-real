@@ -14,6 +14,7 @@ public class Score : MonoBehaviour
         if (score < playerCeilingPosition) {
             score = playerCeilingPosition;
             scoreText.text = score.ToString("0");
+            FindObjectOfType<GameManager>().SetScore(score);
         }
        
 

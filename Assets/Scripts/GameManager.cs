@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 
@@ -52,6 +53,34 @@ public class GameManager : MonoBehaviour
 
     static PlayerAudio playerAudio;
 
+    private static bool fadeIn = false;
+    private static bool fadeOut = false;
+    private float fadeSpeed = 0.024f;
+
+    public Image fadeCanvas;
+
+    private static int scoreDistance = 0;
+    public Text scoreText2;
+    private static int secondsInDream = 0;
+    public Text dreamText;
+    private static int ghostKilled = 0;
+    public Text ghostKilledText;
+    private float timer = 0;
+
+    public void SetScore(int score)
+    {
+        scoreDistance = score;
+    }
+
+
+    private void ResetScores()
+    {
+        scoreDistance = 0;
+        secondsInDream = 0;
+        ghostKilled = 0;
+        timer = 0;
+    }
+
     void Start()
     {
         if (!gameHasEnded)
@@ -86,6 +115,68 @@ public class GameManager : MonoBehaviour
             playerAudio = player.GetComponent<PlayerAudio>();
         }
 
+    }
+
+    private float alpha = 1;
+    void Update()
+    {
+        //cheats
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            SpawnShield();
+        }
+
+        if (isDreaming)
+        {
+            timer += Time.deltaTime;
+            secondsInDream = (int)timer % 60;
+        }
+
+        if (Input.anyKeyDown && gameHasEnded
+            && !(Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2)))
+        {
+            gameHasEnded = false;
+            SceneManager.LoadScene(0);
+        }
+
+        if (fadeIn)
+        {
+            Color objectColor = fadeCanvas.GetComponent<Image>().color;
+            objectColor.a += fadeSpeed;
+            fadeCanvas.GetComponent<Image>().color = objectColor;
+
+
+            if (objectColor.a >= 1)
+            { 
+                SceneManager.LoadScene(1);
+                fadeIn = false;
+                fadeOut = true;
+
+            }
+        }
+        if (fadeOut)
+        {
+
+ 
+ 
+
+            Color objectColor = fadeCanvas.GetComponent<Image>().color;
+            objectColor.a -= fadeSpeed;
+            fadeCanvas.GetComponent<Image>().color = objectColor;
+
+            //todo-ck this is a bad place for this :) 
+            if (objectColor.a <= 0.5)
+            {
+                scoreText2.text = "distance travelled:  " + scoreDistance.ToString();
+                dreamText.text = "time spent dreaming: " + secondsInDream.ToString();
+                ghostKilledText.text = "ghosts killed: " + ghostKilled.ToString();
+            }
+
+            if (objectColor.a <= 0)
+            {
+                fadeOut = false;
+            }
+        }
     }
 
     public void SpawnPlatformAndPortal()
@@ -213,23 +304,6 @@ public class GameManager : MonoBehaviour
         destroyObjects(portals, 8, 1);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //cheats
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            SpawnShield();
-        }
-
-        if (Input.anyKeyDown && gameHasEnded
-            && !(Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2)))
-        {
-            gameHasEnded = false;
-            SceneManager.LoadScene(0); 
-        }
-    }
-
     private void toggleMusicPitch()
     {
         if (isDreaming)
@@ -262,6 +336,7 @@ public class GameManager : MonoBehaviour
             Destroy(ghostToKill);
             Destroy(effect.gameObject, 3);
             ghosts.RemoveAt(ghosts.Count - 1);
+            ghostKilled++;
 
             //play a kill ghost sound
             GameObject.FindObjectOfType<PlayerAudio>().playGhostDeathSound();
@@ -295,7 +370,9 @@ public class GameManager : MonoBehaviour
     {
         FindObjectOfType<PlayerMovement>().resetPlayerProps();
         resetMusicPitch();
-        SceneManager.LoadScene(1);
+        //SceneManager.LoadScene(1);
+        fadeIn = true;
+        
     }
 
     public void CreateGhostAtPosition(Vector3 lastPortalPosition)

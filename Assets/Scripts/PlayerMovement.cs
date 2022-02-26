@@ -26,7 +26,6 @@ public class PlayerMovement : MonoBehaviour
     private bool forwardButtonPressed = false;
     private bool backwardButtonPressed = false;
 
-
     static PlayerAudio playerAudio;
 
     void Start()

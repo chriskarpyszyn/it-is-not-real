@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SceneFade : MonoBehaviour
 {
+    private List<GameObject> allObjects = new List<GameObject>();
+
     // Start is called before the first frame update
     void Start()
     {

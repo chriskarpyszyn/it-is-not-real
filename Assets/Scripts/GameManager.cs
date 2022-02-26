@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
 
     private static GameObject musicManager;
 
-    private bool gameHasEnded = false;
+    static private bool gameHasEnded = false;
     private Vector3 lastPortalPosition;
     private bool isDreaming = false;
     private float ghostSpawnDelay = 1.98f;
@@ -54,35 +54,38 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-
-        List<string> test = new List<string>();
-
-        if (!GameObject.FindGameObjectWithTag("MusicManager"))
+        if (!gameHasEnded)
         {
-            musicManager = Instantiate(musicManagerPrefab, transform.position, Quaternion.identity);
-            musicManager.name = musicManagerPrefab.name;
-            DontDestroyOnLoad(musicManager);
+            List<string> test = new List<string>();
+
+            if (!GameObject.FindGameObjectWithTag("MusicManager"))
+            {
+                musicManager = Instantiate(musicManagerPrefab, transform.position, Quaternion.identity);
+                musicManager.name = musicManagerPrefab.name;
+                DontDestroyOnLoad(musicManager);
+            }
+
+            //load level procedurally
+
+            //create platform
+            float platformXDistance = Mathf.Ceil(Random.Range(6f, 10f));
+            //GameObject firstPlatform = Instantiate(platformPrefab, new Vector3(0,0,0), Quaternion.identity);
+            GameObject firstPlatform = GameObject.Find("Platform");
+            platforms.Add(firstPlatform);
+            SpawnPlatformAndPortal();
+            SpawnPlatformAndPortal();
+            SpawnPlatformAndPortal();
+
+            //int numOfPlatforms = 50;
+            //for (int i=0; i<= numOfPlatforms; i++)
+            //{
+            //    SpawnAnotherPlatform();
+            //    SpawnAPortal();
+            //}
+
+            playerAudio = player.GetComponent<PlayerAudio>();
         }
 
-        //load level procedurally
-
-        //create platform
-        float platformXDistance = Mathf.Ceil(Random.Range(6f, 10f));
-        //GameObject firstPlatform = Instantiate(platformPrefab, new Vector3(0,0,0), Quaternion.identity);
-        GameObject firstPlatform = GameObject.Find("Platform");
-        platforms.Add(firstPlatform);
-        SpawnPlatformAndPortal();
-        SpawnPlatformAndPortal();
-        SpawnPlatformAndPortal();
-
-        //int numOfPlatforms = 50;
-        //for (int i=0; i<= numOfPlatforms; i++)
-        //{
-        //    SpawnAnotherPlatform();
-        //    SpawnAPortal();
-        //}
-
-        playerAudio = player.GetComponent<PlayerAudio>();
     }
 
     public void SpawnPlatformAndPortal()
@@ -218,6 +221,13 @@ public class GameManager : MonoBehaviour
         {
             SpawnShield();
         }
+
+        if (Input.anyKeyDown && gameHasEnded
+            && !(Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2)))
+        {
+            gameHasEnded = false;
+            SceneManager.LoadScene(0); 
+        }
     }
 
     private void toggleMusicPitch()
@@ -285,7 +295,7 @@ public class GameManager : MonoBehaviour
     {
         FindObjectOfType<PlayerMovement>().resetPlayerProps();
         resetMusicPitch();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(1);
     }
 
     public void CreateGhostAtPosition(Vector3 lastPortalPosition)
